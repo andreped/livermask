@@ -24,7 +24,8 @@ setuptools.setup(
         'scipy',
         'tqdm',
         'nibabel',
-        'h5py'
+        'h5py',
+        'gdown'
     ],
      classifiers=[
          "Programming Language :: Python :: 3",
