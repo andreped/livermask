@@ -1,6 +1,6 @@
 # Automatic liver segmentation in CT using deep learning
 
-![Screenshot](figures/Segmentation_CustusX.png)
+![Screenshot](figures/Segmentation_CustusX.PNG)
 
 Steps:
 1) Simply clone the git
