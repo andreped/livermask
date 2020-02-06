@@ -1,5 +1,7 @@
 # Automatic liver segmentation in CT using deep learning
 
+###### Trained 2D model on the LITS dataset is automatically downloaded and can be used as you wish.
+
 ![Screenshot](figures/Segmentation_CustusX.PNG)
 
 Steps:
