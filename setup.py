@@ -26,7 +26,7 @@ setuptools.setup(
         'nibabel',
         'h5py',
         'gdown',
-        'skimage'
+        'scikit-image'
     ],
      classifiers=[
          "Programming Language :: Python :: 3",
