@@ -9,15 +9,15 @@ First of all:
 The LITS dataset can be accessible from here (https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056).
 
 Usage:
-> git clone https://github.com/andreped/livermask.git
-> cd livermask
-> python3 -m venv venv
-> python -m pip install -r /path/to/requirements.txt .
-> cd lungmask
-> python lungmask.py "path_to_ct_nifti.nii" "output_name.nii"
+> git clone https://github.com/andreped/livermask.git \
+> cd livermask \
+> python3 -m venv venv \
+> python -m pip install -r /path/to/requirements.txt . \
+> cd lungmask \
+> python lungmask.py "path_to_ct_nifti.nii" "output_name.nii" 
 
 If you lack any modules after, try installing them through setup.py (could be done instead of using requirements.txt):
-> pip install wheel
+> pip install wheel \
 > python setup.py bdist_wheel
 
 NOTE: Currently, model only works for the nifti format, and outputs a binary volume in the same format (*.nii). But this format can be imported in CustusX. I wouldn't recommend mixing DICOM and .nii prediction file in CustusX, as there seem to be some orientation issues between these (bug to be fixed in the future). But simply convert DICOM -> NIFTI using the command-line tool dcm2niix (https://github.com/rordenlab/dcm2niix).
