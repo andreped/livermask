@@ -17,3 +17,5 @@ Convert DICOM -> NIFTI doing this:
 > dcm2niix -s y -m y "path_to_CT_folder" "output_name"
 
 It is possible to set "." for "output_name", which in theory should output a file with the same name as the DICOM folder, but that doesn't seem to happen...
+
+NOTE2: Requirements.txt is outdated. I would use setup.py for installing the correct dependencies. Will update requirements.txt in the future.
