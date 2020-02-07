@@ -20,4 +20,4 @@ It is possible to set "." for "output_name", which in theory should output a fil
 
 A few final notes:
 1) Requirements.txt is outdated. I would use setup.py for installing the correct dependencies. Will update requirements.txt in the future.
-2) If you get SSLError during downloading the model, disable the VPN, e.g. cisco. For those on the sintef network, if the same problem occur, try changing network to Eduroam or similar.
+2) If you get SSLError during downloading the model, disable VPN, e.g. cisco. For those on the sintef network, try changing network to Eduroam or similar, as it might be a most-famous evry-issue...
