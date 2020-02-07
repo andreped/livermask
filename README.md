@@ -23,9 +23,9 @@ If you lack any modules after, try installing them through setup.py (could be do
 NOTE: Currently, model only works for the nifti format, and outputs a binary volume in the same format (*.nii). But this format can be imported in CustusX. I wouldn't recommend mixing DICOM and .nii prediction file in CustusX, as there seem to be some orientation issues between these (bug to be fixed in the future). But simply convert DICOM -> NIFTI using the command-line tool dcm2niix (https://github.com/rordenlab/dcm2niix).
 
 Convert DICOM -> NIFTI doing this:
-> dcm2niix -s y -m y "path_to_CT_folder" "output_name"
+> dcm2niix -s y -m y -d 1 "path_to_CT_folder" "output_name"
 
-It is possible to set "." for "output_name", which in theory should output a file with the same name as the DICOM folder, but that doesn't seem to happen...
+Note that "-d 1" assumed that "path_to_CT_folder" is the folder just before the set of DICOM scans you want to import and convert. This can be removed if you want to convert multiple ones at the same time. It is possible to set "." for "output_name", which in theory should output a file with the same name as the DICOM folder, but that doesn't seem to happen...
 
 A few final notes:
 1) If you get SSLError during downloading the model, disable VPN, e.g. cisco. For those on the sintef network, try changing network to Eduroam or similar, as it might be a most-famous evry-issue...
