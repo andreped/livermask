@@ -5,7 +5,10 @@
 
 ![Screenshot](figures/Segmentation_CustusX.PNG)
 
-Steps:
+First of all:
+The LITS dataset can be accessible from here (https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056).
+
+Usage:
 1) Simply clone the git
 2) Create and activate virtual environment with dependencies (run > python setup.py for dependencies)
 3) The inference script is located in the lungmask subfolder. Deploy the trained model on a user-specified CT running:
