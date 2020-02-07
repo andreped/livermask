@@ -7,8 +7,8 @@
 
 Steps:
 1) Simply clone the git
-2) Create and activate virtual environment with dependencies (see requirements.txt)
-3) The inference script is located in the lungmask subfolder. Deploy the model running:
+2) Create and activate virtual environment with dependencies (run > python setup.py for dependencies)
+3) The inference script is located in the lungmask subfolder. Deploy the trained model on a user-specified CT running:
 > python lungmask.py *path_to_nifti_file.nii* *output_name.nii*
 
 NOTE: Currently, model only works for the nifti format, and outputs a binary volume in the same format (*.nii). But this format can be imported in CustusX. I wouldn't recommend mixing DICOM and .nii prediction file in CustusX, as there seem to be some orientation issues between these (bug to be fixed in the future). But simply convert DICOM -> NIFTI using the command-line tool dcm2niix (https://github.com/rordenlab/dcm2niix).
