@@ -7,6 +7,8 @@ from nibabel.processing import resample_to_output, resample_from_to
 from scipy.ndimage import zoom
 from tensorflow.python.keras.models import load_model
 import gdown
+from skimage.morphology import remove_small_holes, binary_dilation, binary_erosion, ball
+from skimage.measure import label, regionprops
 import warnings
 warnings.filterwarnings('ignore', '.*output shape of zoom.*')
 
@@ -23,11 +25,14 @@ def intensity_normalization(volume, intensity_clipping_range):
 
 	return result
 
+def post_process(pred):
+	return pred
+
 def get_model():
-	url = "https://drive.google.com/uc?id=1RBhmmpeH-pd6ugV5-y_9coEoVHJlw_b-"
+	url = "https://drive.google.com/uc?id=1vQAr_gDJVCILIGYOQbesosC25o1lfo9W"
 	output = "model.h5"
-	md5 = "aebe1d94c52abfd7468da0f189a49c47"
-	gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
+	md5 = "4da01e3115a16afdff15751f74e3186b"
+	gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
 
 def func(path, output):
 
@@ -70,6 +75,7 @@ def func(path, output):
 	pred = np.zeros_like(data).astype(np.float32)
 	for i in tqdm(range(data.shape[-1]), "pred: "):
 		pred[..., i] = model.predict(np.expand_dims(np.expand_dims(np.expand_dims(data[..., i], axis=0), axis=-1), axis=0))[0, ..., 1]
+	del data 
 
 	# threshold
 	pred = (pred >= 0.5).astype(int)
@@ -78,10 +84,33 @@ def func(path, output):
 	pred = np.flip(pred, axis=0)
 	pred = np.rot90(pred, k=-1, axes=(0, 1))
 
-	print("postprocessing...")
+	print("resize back...")
 	# resize back from 512x512
 	pred = zoom(pred, [curr_shape[0] / img_size, curr_shape[1] / img_size, 1.0], order=1)
 	pred = (pred >= 0.5).astype(np.float32)
+
+	print("morphological post-processing...")
+	# morpological post-processing
+	# 1) first erode
+	pred = binary_erosion(pred.astype(bool), ball(3)).astype(np.float32)
+
+	# 2) keep only largest connected component
+	labels = label(pred)
+	regions = regionprops(labels)
+	area_sizes = []
+	for region in regions:
+		area_sizes.append([region.label, region.area])
+	area_sizes = np.array(area_sizes)
+	tmp = np.zeros_like(pred)
+	tmp[labels == area_sizes[np.argmax(area_sizes[:, 1]), 0]] = 1
+	pred = tmp.copy()
+	del tmp, labels, regions, area_sizes
+
+	# 3) dilate
+	pred = binary_dilation(pred.astype(bool), ball(3))
+
+	# 4) remove small holes
+	pred = remove_small_holes(pred.astype(bool), area_threshold=0.001*np.prod(pred.shape)).astype(np.float32)
 
 	print("saving...")
 	pred = pred.astype(np.uint8)
@@ -97,6 +126,7 @@ def main():
 
 	path = sys.argv[1]
 	output = sys.argv[2]
+	#output = sys.argv[3]
 
 	func(path, output)
 
