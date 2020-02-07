@@ -18,4 +18,6 @@ Convert DICOM -> NIFTI doing this:
 
 It is possible to set "." for "output_name", which in theory should output a file with the same name as the DICOM folder, but that doesn't seem to happen...
 
-NOTE2: Requirements.txt is outdated. I would use setup.py for installing the correct dependencies. Will update requirements.txt in the future.
+A few final notes:
+1) Requirements.txt is outdated. I would use setup.py for installing the correct dependencies. Will update requirements.txt in the future.
+2) If you get SSLError during downloading the model, disable the VPN, e.g. cisco. For those on the sintef network, if the same problem occur, try changing network to Eduroam or similar.
