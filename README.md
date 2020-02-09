@@ -6,7 +6,7 @@
 ![Screenshot](figures/Segmentation_CustusX.PNG)
 
 First of all:
-The LITS dataset can be accessible from here (https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056).
+The LITS dataset can be accessible from here (https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056). If trained model is used please cite this paper.
 
 Usage:
 > git clone https://github.com/andreped/livermask.git \
