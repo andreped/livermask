@@ -5,6 +5,8 @@
 
 ![Screenshot](figures/Segmentation_CustusX.PNG)
 
+The figure shows a predicted liver with the corresponding patient CT in 3DSlicer. It is the Volume-10 from the LITS17 dataset.
+
 First of all:
 The LITS dataset can be accessible from here (https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056). If trained model is used please cite this paper.
 
