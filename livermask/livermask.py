@@ -78,7 +78,7 @@ def func(path, output):
 	del data 
 
 	# threshold
-	pred = (pred >= 0.5).astype(int)
+	pred = (pred >= 0.4).astype(int)
 
 	# fix orientation back
 	pred = np.flip(pred, axis=0)
