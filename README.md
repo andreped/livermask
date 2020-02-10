@@ -12,9 +12,9 @@ Usage:
 > git clone https://github.com/andreped/livermask.git \
 > cd livermask \
 > python3 -m venv venv \
-> python -m pip install -r /path/to/requirements.txt . \
-> cd lungmask \
-> python lungmask.py "path_to_ct_nifti.nii" "output_name.nii" 
+> python -m pip install -r /path/to/requirements.txt . \   <- might want to run > python setup.py bdist_wheel < before
+> cd livermask \
+> python livermask.py "path_to_ct_nifti.nii" "output_name.nii" 
 
 If you lack any modules after, try installing them through setup.py (could be done instead of using requirements.txt):
 > pip install wheel \
