@@ -19,7 +19,7 @@ setuptools.setup(
         ]
      },
      install_requires=[
-        'tensorflow==1.13.1',
+        'tensorflow==1.15.4',
         'numpy',
         'scipy',
         'tqdm',
