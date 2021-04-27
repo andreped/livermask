@@ -8,7 +8,7 @@
 The figure shows a predicted liver mask with the corresponding patient CT in 3DSlicer. It is the Volume-10 from the LITS17 dataset.
 
 ### Credit
-The LITS dataset can be accessible from [here](https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056). If trained model is used please cite this paper.
+The LITS dataset can be accessible from [here](https://competitions.codalab.org), and the corresponding paper for the challenge from [here](https://arxiv.org/abs/1901.04056). If trained model is used, please consider citing this paper.
 
 ### Usage:
 
