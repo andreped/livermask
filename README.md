@@ -7,10 +7,10 @@
 
 The figure shows a predicted liver mask with the corresponding patient CT in 3DSlicer. It is the Volume-10 from the LITS17 dataset.
 
-## Credit
+### Credit
 The LITS dataset can be accessible from [here](https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056). If trained model is used please cite this paper.
 
-## Usage:
+### Usage:
 ```
 git clone https://github.com/andreped/livermask.git
 cd livermask
@@ -26,7 +26,7 @@ pip install wheel
 python setup.py bdist_wheel
 ```
 
-## DICOM/NIfTI format
+### DICOM/NIfTI format
 Pipeline assumes input is in the NIfTI format, and output a binary volume in the same format (.nii).
 DICOM can be converted to NIfTI using the CLI [dcm2niix](https://github.com/rordenlab/dcm2niix), as such:
 ```
@@ -35,7 +35,7 @@ dcm2niix -s y -m y -d 1 "path_to_CT_folder" "output_name"
 
 Note that "-d 1" assumed that "path_to_CT_folder" is the folder just before the set of DICOM scans you want to import and convert. This can be removed if you want to convert multiple ones at the same time. It is possible to set "." for "output_name", which in theory should output a file with the same name as the DICOM folder, but that doesn't seem to happen...
 
-## Troubleshooting
+### Troubleshooting
 You might have issues downloading the model when using VPN. If any issues are observed, try to disable VPN and try again.
 
 ------
