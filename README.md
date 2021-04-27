@@ -1,7 +1,7 @@
 # Automatic liver segmentation in CT using deep learning
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
 
-#### Trained 2D model on the LITS dataset is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
+#### Trained U-Net on the LITS dataset is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
 
 <img src="figures/Segmentation_CustusX.PNG" width="70%" height="70%">
 
@@ -12,17 +12,17 @@ The LITS dataset can be accessible from [here](https://competitions.codalab.org)
 
 ## Usage:
 ```
-git clone https://github.com/andreped/livermask.git \
-cd livermask \
-python -m venv venv \
-python -m pip install -r /path/to/requirements.txt . \   <- might want to run > python setup.py bdist_wheel < before
-cd livermask \
+git clone https://github.com/andreped/livermask.git
+cd livermask
+python -m venv venv
+python -m pip install -r /path/to/requirements.txt
+cd livermask
 python livermask.py "path_to_ct_nifti.nii" "output_name.nii"
 ```
 
 If you lack any modules after, try installing them through setup.py (could be done instead of using requirements.txt):
 ```
-pip install wheel \
+pip install wheel
 python setup.py bdist_wheel
 ```
 
