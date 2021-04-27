@@ -11,11 +11,20 @@ The figure shows a predicted liver mask with the corresponding patient CT in 3DS
 The LITS dataset can be accessible from [here](https://competitions.codalab.org), and the corresponding paper for the challenge (Bilic. P et al.. (2019). The Liver Tumor Segmentation Benchmark (LiTS). https://arxiv.org/abs/1901.04056). If trained model is used please cite this paper.
 
 ### Usage:
+
+1) Clone repo:
 ```
 git clone https://github.com/andreped/livermask.git
 cd livermask
-python -m venv venv
-python -m pip install -r /path/to/requirements.txt
+```
+2) Create virtual environment and intall dependencies:
+```
+virtualenv -ppython3 venv
+source venv/bin/activate
+pip install -r /path/to/requirements.txt
+```
+3) Run livermask method:
+```
 cd livermask
 python livermask.py "path_to_ct_nifti.nii" "output_name.nii"
 ```
