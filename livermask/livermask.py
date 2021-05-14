@@ -29,7 +29,7 @@ def post_process(pred):
 	return pred
 
 def get_model():
-	url = "https://drive.google.com/uc?id=181VE-FiqZ2z7xY30LK9GIvLeEEJW0YF-"
+	url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
 	output = "model.h5"
 	md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
 	gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
