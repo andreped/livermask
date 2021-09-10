@@ -1,7 +1,7 @@
 # Automatic liver segmentation in CT using deep learning
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
 
-#### U-Net trained on the LITS dataset is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
+#### Pretrained U-Net model is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
 
 <img src="figures/Segmentation_CustusX.PNG" width="70%" height="70%">
 
@@ -32,7 +32,9 @@ Note that "-d 1" assumed that "path_to_CT_folder" is the folder just before the 
 You might have issues downloading the model when using VPN. If any issues are observed, try to disable VPN and try again.
 
 ## Acknowledgements
-The LITS dataset can be accessible from [here](https://competitions.codalab.org), and the corresponding paper for the challenge from [here](https://arxiv.org/abs/1901.04056). If trained model is used, please consider citing this paper.
+The model was trained on the LITS dataset. The dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org). If this tool is used, please, consider citing the corresponding [LITS challenge dataset paper](https://arxiv.org/abs/1901.04056).
+
+Disclaimer, I have no affiliation with the LITS challenge, the LITS dataset, or the challenge paper. I only wish to provide an open, free-to-use tool that people may find useful :)
 
 ------
 
