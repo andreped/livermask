@@ -14,12 +14,8 @@ import pkg_resources
 import tensorflow as tf
 
 
-# due to this: https://github.com/tensorflow/tensorflow/issues/35029
-os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
-
-
-# mute some warnings
-warnings.filterwarnings('ignore', '.*output shape of zoom.*')
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'  # due to this: https://github.com/tensorflow/tensorflow/issues/35029
+warnings.filterwarnings('ignore', '.*output shape of zoom.*')  # mute some warnings
 
 
 def intensity_normalization(volume, intensity_clipping_range):
@@ -32,7 +28,6 @@ def intensity_normalization(volume, intensity_clipping_range):
     max_val = np.amax(result)
     if (max_val - min_val) != 0:
         result = (result - min_val) / (max_val - min_val)
-
     return result
 
 def post_process(pred):
@@ -40,15 +35,11 @@ def post_process(pred):
 
 def get_model(output):
     url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
-    # output = "./model.h5"
     md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
     gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
 
 def func(path, output, cpu):
-
     cwd = "/".join(os.path.realpath(__file__).replace("\\", "/").split("/")[:-1]) + "/"
-
-    print("Current cwd:", cwd)
     name = cwd + "model.h5"
 
     # get model
