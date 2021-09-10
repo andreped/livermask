@@ -38,9 +38,9 @@ def intensity_normalization(volume, intensity_clipping_range):
 def post_process(pred):
     return pred
 
-def get_model():
+def get_model(output):
     url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
-    output = "./model.h5"
+    # output = "./model.h5"
     md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
     gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
 
@@ -52,7 +52,7 @@ def func(path, output, cpu):
     name = cwd + "model.h5"
 
     # get model
-    get_model()
+    get_model(name)
 
     # load model
     model = load_model(name, compile=False)
