@@ -2,3 +2,5 @@ venv/
 build/
 dist/
 livermask.egg-info/ 
+*.h5
+*.nii
