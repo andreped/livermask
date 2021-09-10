@@ -31,6 +31,11 @@ Note that "-d 1" assumed that "path_to_CT_folder" is the folder just before the 
 ## Troubleshooting
 You might have issues downloading the model when using VPN. If any issues are observed, try to disable VPN and try again.
 
+If the program struggles to install, attempt to install using:
+```
+pip install --force-reinstall --no-deps git+https://github.com/andreped/livermask.git
+```
+
 ## Acknowledgements
 The model was trained on the LITS dataset. The dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org). If this tool is used, please, consider citing the corresponding [LITS challenge dataset paper](https://arxiv.org/abs/1901.04056).
 
