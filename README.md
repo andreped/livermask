@@ -3,7 +3,7 @@
 
 #### Pretrained U-Net model is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
 
-<img src="figures/Segmentation_CustusX.PNG" width="70%" height="70%">
+<img src="figures/Segmentation_3DSlicer.PNG" width="70%" height="70%">
 
 ## Install
 
