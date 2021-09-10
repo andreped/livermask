@@ -40,7 +40,7 @@ def post_process(pred):
 
 def get_model():
     url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
-    output = "model.h5"
+    output = "./model.h5"
     md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
     gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
 
@@ -48,6 +48,7 @@ def func(path, output, cpu):
 
     cwd = "/".join(os.path.realpath(__file__).replace("\\", "/").split("/")[:-1]) + "/"
 
+    print("Current cwd:", cwd)
     name = cwd + "model.h5"
 
     # get model
