@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 setuptools.setup(
      name='livermask',  
      version='1.0.0',
-     author="Andre Pedersen",
+     author="André Pedersen",
      author_email="andrped94@gmail.com",
      license='MIT',
      description="A package for automatic segmentation of liver from CT data",

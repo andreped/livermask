@@ -117,7 +117,7 @@ def func(path, output):
 
 
 def main():
-	os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+	os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # disable GPU
 
 	path = sys.argv[1]
 	output = sys.argv[2]
@@ -127,8 +127,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
-
-	
-
-
