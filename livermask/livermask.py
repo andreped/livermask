@@ -12,6 +12,7 @@ from skimage.measure import label, regionprops
 import warnings
 warnings.filterwarnings('ignore', '.*output shape of zoom.*')
 
+
 def intensity_normalization(volume, intensity_clipping_range):
 	result = np.copy(volume)
 
@@ -38,11 +39,7 @@ def func(path, output):
 
 	cwd = "/".join(os.path.realpath(__file__).replace("\\", "/").split("/")[:-1]) + "/"
 
-	#print(cwd)
-	#print(" :) ")
-
 	name = cwd + "model.h5"
-	#name = "\.model.h5"
 
 	# get model
 	get_model()
@@ -122,11 +119,8 @@ def func(path, output):
 def main():
 	os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-	#__os.path
-
 	path = sys.argv[1]
 	output = sys.argv[2]
-	#output = sys.argv[3]
 
 	func(path, output)
 
