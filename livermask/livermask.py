@@ -144,6 +144,10 @@ def main():
             # Memory growth must be set before GPUs have been initialized
             print(e)
 
+    if ret.input is None:
+        raise ValueError("Please, provide an input.")
+    if ret.output is None:
+        raise ValueError("Please, provide an output.")
     if not ret.input.endswith(".nii"):
         raise ValueError("Image provided is not in the supported '.nii' format.")
     if not ret.output.endswith(".nii"):
