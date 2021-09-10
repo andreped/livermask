@@ -1,11 +1,9 @@
 # Automatic liver segmentation in CT using deep learning
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
 
-#### Trained U-Net on the LITS dataset is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
+#### U-Net trained on the LITS dataset is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
 
 <img src="figures/Segmentation_CustusX.PNG" width="70%" height="70%">
-
-The figure shows a predicted liver mask with the corresponding patient CT in 3DSlicer. It is the Volume-10 from the LITS17 dataset.
 
 ## Install
 
