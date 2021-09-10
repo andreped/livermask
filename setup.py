@@ -3,6 +3,9 @@ import setuptools
 with open("README.md", "r") as f:
     long_description = f.read()
 
+with open('misc/requirements_torch.txt', 'r', encoding='utf-16') as ff:
+    required = ff.read().splitlines()
+
 setuptools.setup(
      name='livermask',  
      version='1.0.0',
@@ -19,16 +22,7 @@ setuptools.setup(
             'livermask = livermask.livermask:main'
         ]
      },
-     install_requires=[
-        'numpy'
-        'tensorflow==2.6',
-        'scipy',
-        'tqdm',
-        'nibabel',
-        'h5py',
-        'gdown',
-        'scikit-image'
-    ],
+     install_requires=required,
      classifiers=[
          "Programming Language :: Python :: 3",
          "License :: OSI Approved :: MIT License",

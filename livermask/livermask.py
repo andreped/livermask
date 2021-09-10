@@ -1,6 +1,5 @@
 import numpy as np 
 import os, sys
-import h5py
 from tqdm import tqdm 
 import nibabel as nib
 from nibabel.processing import resample_to_output, resample_from_to
@@ -12,6 +11,11 @@ from skimage.measure import label, regionprops
 import warnings
 import argparse
 import pkg_resources
+import tensorflow as tf
+
+
+# due to this: https://github.com/tensorflow/tensorflow/issues/35029
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 
 
 # mute some warnings
@@ -40,7 +44,7 @@ def get_model():
     md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
     gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
 
-def func(path, output):
+def func(path, output, cpu):
 
     cwd = "/".join(os.path.realpath(__file__).replace("\\", "/").split("/")[:-1]) + "/"
 
@@ -122,19 +126,36 @@ def func(path, output):
 
 
 def main():
-    # os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # disable GPU
-    version = pkg_resources.require("livermask")[0].version
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', metavar='--i', type=str, nargs='?',
                     help="set path of which image to use.")
     parser.add_argument('--output', metavar='--o', type=str, nargs='?',
                     help="set path to store the output.")
-    parser.add_argument('--cpu', metavar='--o', action='store_true',
+    parser.add_argument('--cpu', action='store_true',
                     help="force using the CPU even if a GPU is available.")
-    parser.add_argument('--version', metavar='--v',
-                    help='shows the current version of livermask.', version=version)
     ret = parser.parse_args(sys.argv[1:]); print(ret)
+
+    if ret.cpu:
+        os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+    if not tf.test.is_gpu_available():
+        tf.config.set_visible_devices([], 'GPU')
+        visible_devices = tf.config.get_visible_devices()
+    else:
+        gpus = tf.config.experimental.list_physical_devices('GPU')
+        try:
+            # Currently, memory growth needs to be the same across GPUs
+            for gpu in gpus:
+                tf.config.experimental.set_memory_growth(gpu, enable=True)
+            logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+            print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+        except RuntimeError as e:
+            # Memory growth must be set before GPUs have been initialized
+            print(e)
+
+    if not ret.input.endswith(".nii"):
+        raise ValueError("Image provided is not in the supported '.nii' format.")
+    if not ret.output.endswith(".nii"):
+        raise ValueError("Output name set is not in the supported '.nii' format.")
 
     # fix paths
     ret.input = ret.input.replace("\\", "/")
