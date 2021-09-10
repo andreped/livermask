@@ -20,8 +20,8 @@ setuptools.setup(
         ]
      },
      install_requires=[
-        'tensorflow==1.13.1',
-        'numpy',
+        'numpy'
+        'tensorflow==2.6',
         'scipy',
         'tqdm',
         'nibabel',
