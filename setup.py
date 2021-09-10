@@ -1,13 +1,14 @@
 import setuptools
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+with open("README.md", "r", encoding='utf-16') as f:
+    long_description = f.read()
 
 setuptools.setup(
      name='livermask',  
-     version='0.1',
+     version='1.0.0',
      author="Andre Pedersen",
-     author_email="andre.pedersen@sintef.no",
+     author_email="andrped94@gmail.com",
+     license='MIT',
      description="A package for automatic segmentation of liver from CT data",
      long_description=long_description,
      long_description_content_type="text/markdown",
