@@ -46,8 +46,8 @@ jobs:
         run: livermask --help
 
       - name: Upload Python wheel
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: Python wheel
-          path: ${{github.workspace}}/build/dist/livermask-*.whl
+          path: ${{github.workspace}}/dist/livermask-*.whl
           if-no-files-found: error
