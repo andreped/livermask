@@ -44,3 +44,10 @@ jobs:
 
       - name: Test CLI
         run: livermask --help
+
+      - name: Upload Python wheel
+        uses: actions/upload-artifact@v1
+        with:
+          name: Python wheel
+          path: ${{github.workspace}}/build/dist/livermask-*.whl
+          if-no-files-found: error
