@@ -30,6 +30,14 @@ jobs:
         with:
           python-version: 3.7
 
+      - name: Install dependencies
+        run: pip install wheel setuptools
+
+      - name: Build wheel
+        run: |
+          python setup.py bdist_wheel --universal
+          ls
+
       - name: Install program for ${{matrix.TARGET}}
         run: ${{matrix.CMD_BUILD}}
 
