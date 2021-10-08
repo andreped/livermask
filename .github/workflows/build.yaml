@@ -1,0 +1,19 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    steps:
+      - uses: actions/checkout@v2
+
+    - name: Install program
+      run: pip install git+https://github.com/andreped/livermask.git
+
+    - name: Test CLI
+      run: livermask --help
+      
