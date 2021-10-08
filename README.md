@@ -1,5 +1,6 @@
 # Automatic liver segmentation in CT using deep learning
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
+[![Build Actions Status](https://github.com/andreped/livermask/workflows/Build/badge.svg)](https://github.com/andreped/livermask/actions)
 
 #### Pretrained U-Net model is automatically downloaded when running the inference script and can be used as you wish, ENJOY! :)
 
