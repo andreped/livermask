@@ -11,9 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-    - name: Install program
-      run: pip install git+https://github.com/andreped/livermask.git
+      - name: Install program
+        run: pip install git+https://github.com/andreped/livermask.git
 
-    - name: Test CLI
-      run: livermask --help
+      - name: Test CLI
+        run: livermask --help
       
