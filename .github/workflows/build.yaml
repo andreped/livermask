@@ -23,8 +23,6 @@ jobs:
           - os: windows-2019
             TARGET: windows
             CMD_BUILD: pip install git+https://github.com/andreped/livermask.git
-
-    runs-on: ubu
     steps:
       - uses: actions/checkout@v2
 
