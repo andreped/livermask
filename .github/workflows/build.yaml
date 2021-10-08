@@ -34,10 +34,7 @@ jobs:
         run: pip install wheel setuptools
 
       - name: Build wheel
-        run: |
-          python setup.py bdist_wheel --universal
-          cd dist
-          ls
+        run: python setup.py bdist_wheel --universal
 
       - name: Install program for ${{matrix.TARGET}}
         run: ${{matrix.CMD_BUILD}}
