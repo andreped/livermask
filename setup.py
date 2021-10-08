@@ -8,7 +8,7 @@ with open('requirements.txt', 'r', encoding='utf-16') as ff:
 
 setuptools.setup(
      name='livermask',  
-     version='1.0.0',
+     version='1.1.0',
      author="André Pedersen",
      author_email="andrped94@gmail.com",
      license='MIT',
