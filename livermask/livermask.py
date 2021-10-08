@@ -69,6 +69,10 @@ def func(path, output, cpu, verbose):
         os.makedirs(output + "/", exist_ok=True)
 
     for curr in tqdm(paths, "CT:"):
+        # check if current file is a nifti file, if not, skip
+        if not curr.endswith(".ini"):
+            continue
+
         log.info("preprocessing...")
         nib_volume = nib.load(curr)
         new_spacing = [1., 1., 1.]
