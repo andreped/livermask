@@ -36,6 +36,7 @@ jobs:
       - name: Build wheel
         run: |
           python setup.py bdist_wheel --universal
+          cd dist
           ls
 
       - name: Install program for ${{matrix.TARGET}}
