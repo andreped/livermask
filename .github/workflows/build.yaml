@@ -24,7 +24,11 @@ jobs:
             TARGET: windows
             CMD_BUILD: pip install git+https://github.com/andreped/livermask.git
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
 
       - name: Install program for ${{matrix.TARGET}}
         run: ${{matrix.CMD_BUILD}}
