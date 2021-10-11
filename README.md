@@ -12,7 +12,7 @@
 pip install git+https://github.com/andreped/livermask.git
 ```
 
-As TensorFlow 2.x only supports Python 3.6-3.9, so does livermask.
+As TensorFlow 2.4 only supports Python 3.6-3.8, so does livermask.
 
 Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 18.04.
 
