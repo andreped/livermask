@@ -70,7 +70,7 @@ def func(path, output, cpu, verbose):
 
     for curr in tqdm(paths, "CT:"):
         # check if current file is a nifti file, if not, skip
-        if not curr.endswith(".ini"):
+        if not curr.endswith(".nii"):
             continue
 
         log.info("preprocessing...")
@@ -110,12 +110,12 @@ def func(path, output, cpu, verbose):
         log.info("resize back...")
         # resize back from 512x512
         pred = zoom(pred, [curr_shape[0] / img_size, curr_shape[1] / img_size, 1.0], order=1)
-        pred = (pred >= 0.5).astype(np.float32)
+        pred = (pred >= 0.5).astype(bool)
 
         log.info("morphological post-processing...")
         # morpological post-processing
         # 1) first erode
-        pred = binary_erosion(pred.astype(bool), ball(3)).astype(np.float32)
+        pred = binary_erosion(pred, ball(3)).astype(np.int32)
 
         # 2) keep only largest connected component
         labels = label(pred)
@@ -133,7 +133,7 @@ def func(path, output, cpu, verbose):
         pred = binary_dilation(pred.astype(bool), ball(3))
 
         # 4) remove small holes
-        pred = remove_small_holes(pred.astype(bool), area_threshold=0.001*np.prod(pred.shape)).astype(np.float32)
+        pred = remove_small_holes(pred.astype(bool), area_threshold=0.001 * np.prod(pred.shape))
 
         log.info("saving...")
         pred = pred.astype(np.uint8)
@@ -173,18 +173,18 @@ def main():
             # Memory growth must be set before GPUs have been initialized
             print(e)
 
+    # fix paths
+    ret.input = ret.input.replace("\\", "/")
+    ret.output = ret.output.replace("\\", "/")
+
     if ret.input is None:
         raise ValueError("Please, provide an input.")
     if ret.output is None:
         raise ValueError("Please, provide an output.")
     if not os.path.isdir(ret.input) and not ret.input.endswith(".nii"):
         raise ValueError("Input path provided is not in the supported '.nii' format or a directory.")
-    if ret.output.endswith(".nii") or not os.path.isdir(ret.output) or "." in ret.output.split("/")[-1]:
+    if ret.output.endswith(".nii") or "." in ret.output.split("/")[-1]:
         raise ValueError("Output path provided is not a directory or a name (remove *.nii format from name).")
-
-    # fix paths
-    ret.input = ret.input.replace("\\", "/")
-    ret.output = ret.output.replace("\\", "/")
 
     func(*vars(ret).values())
 
