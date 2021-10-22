@@ -22,12 +22,12 @@ Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 18.
 livermask --input path-to-input --output path-to-output
 ```
 
-| command | description |
+|  command  | description |
 | ------------------- | ------------- |
-| `--input` | the full path to the input data. Could be nifti file or directory (if directory is provided as input) |
-| `--output` | the full path to the output data. Could be either output name or directory (if directory is provided as input)  |
-| `--cpu` | to disable the GPU (force computations on GPU only) |
-| `--verbose` | to enable verbose |
+| `--input`  | the full path to the input data. Could be nifti file or directory (if directory is provided as input) |
+| `--output`  | the full path to the output data. Could be either output name or directory (if directory is provided as input)  |
+| `--cpu`  | to disable the GPU (force computations on GPU only) |
+| `--verbose`  | to enable verbose |
 
 ## DICOM/NIfTI format
 Pipeline assumes input is in the NIfTI format, and output a binary volume in the same format (.nii).
