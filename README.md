@@ -22,7 +22,7 @@ Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 18.
 livermask --input path-to-input --output path-to-output
 ```
 
-|  command &nbsp; &nbsp; | description |
+|  command &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | description |
 | ------------------- | ------------- |
 | `--input`  | the full path to the input data. Could be nifti file or directory (if directory is provided as input) |
 | `--output`  | the full path to the output data. Could be either output name or directory (if directory is provided as input)  |
