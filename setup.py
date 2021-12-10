@@ -1,4 +1,6 @@
-import setuptools
+from setuptools import setup
+from setuptools.command.install import install
+
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -6,7 +8,29 @@ with open("README.md", "r") as f:
 with open('requirements.txt', 'r', encoding='utf-16') as ff:
     required = ff.read().splitlines()
 
-setuptools.setup(
+# install additional dependencies (CuPy)
+#required.append(cupy-cuda110==9.6.0)
+
+
+class InstallCommand(install):
+    user_option = install.user_options 0 [
+        ('gpu=', None, 'enable flag to install package with GPU support'),
+    ]
+
+    def initialize_options(self):          
+        install.initialize_options(self)   
+        self.gpu = False  
+
+    def finalize_options(self):                   
+        print("value of gpu is ", self.gpu)
+        install.finalize_options(self)            
+
+    def run(self):                                
+        if (self.)                  
+        install.run(self) 
+
+
+setup(
      name='livermask',  
      version='1.2.0',
      author="André Pedersen",
@@ -32,4 +56,5 @@ setuptools.setup(
          "Operating System :: OS Independent",
      ],
      python_requires='>=3.6',
+     cmdclass={'install': InstallCommand},
  )
