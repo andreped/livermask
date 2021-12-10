@@ -16,7 +16,7 @@ import logging as log
 import chainer
 import math
 from .unet3d import UNet3D
-import yaml_utils
+from .yaml_utils import Config
 import yaml
 from tensorflow.keras import backend as K
 from numba import cuda
@@ -133,7 +133,7 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     unet, xp = load_vessel_model(name_vessel, cpu)
 
     # read config
-    config = yaml_utils.Config(yaml.safe_load(open("./configs/base.yml")))
+    config = Config(yaml.safe_load(open("./configs/base.yml")))
 
     # read data
     nib_volume = nib.load(curr)
