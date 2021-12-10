@@ -3,7 +3,7 @@ from setuptools.command.install import install
 import os, sys
 
 
-print("\n\n\n\n---:", sys.args)
+print("\n\n\n\n---:", sys.argv)
 
 
 with open("README.md", "r") as f:
