@@ -7,10 +7,10 @@ with open("README.md", "r") as f:
 
 with open('requirements.txt', 'r', encoding='utf-16') as ff:
     required = ff.read().splitlines()
-    
+
 
 class InstallCommand(install):
-    user_option = install.user_options 0 [
+    user_option = install.user_options + [
         ('cupy=', 'cupy', 'enable flag to install package with GPU support'),
     ]
 
