@@ -1,6 +1,9 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
-import os
+import os, sys
+
+
+print("\n\n\n\n---:", sys.args)
 
 
 with open("README.md", "r") as f:
@@ -12,21 +15,23 @@ with open('requirements.txt', 'r', encoding='utf-16') as ff:
 
 class InstallCommand(install):
     user_option = install.user_options + [
-        ('cupy=', 'cupy', 'enable flag to install package with GPU support'),
+        ('cupyyy=', None, 'enable flag to install package with GPU support'),
     ]
 
     def initialize_options(self):
-        install.initialize_options(self)
+        super().initialize_options()
         self.cupy = "cupy"
 
     def finalize_options(self):
-        print("CuPy version selected is: ", self.cupy)
-        install.finalize_options(self)
+        print("CuPy version selected is: ", self.cupyyy)
+        super().finalize_options()
 
     def run(self):
+        # use options
         global cupy
         required.append(self.cupy)
-        install.run(self)
+
+        super().run()
 
 
 setup(
