@@ -42,8 +42,6 @@ setup(
      entry_points={
         'console_scripts': [
             'livermask = livermask.livermask:main',
-            'unet3d = livermask.unet3d:UNet3D',
-            #'utils = livermask.utils',
         ]
      },
      install_requires=required,
@@ -57,7 +55,5 @@ setup(
      ],
      python_requires='>=3.6',
      cmdclass={'install': InstallCommand},
-     dependency_links=[
-        os.path.join(os.getcwd(), 'deps', 'my_package-1.0.0-py3.5.egg')
-     ]
+     py_modules=['livermask.utils']
  )
