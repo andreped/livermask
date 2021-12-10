@@ -95,14 +95,15 @@ def main():
             # Memory growth must be set before GPUs have been initialized
             print(e)
 
-    # fix paths
-    ret.input = ret.input.replace("\\", "/")
-    ret.output = ret.output.replace("\\", "/")
-
     if ret.input is None:
         raise ValueError("Please, provide an input.")
     if ret.output is None:
         raise ValueError("Please, provide an output.")
+
+    # fix paths
+    ret.input = ret.input.replace("\\", "/")
+    ret.output = ret.output.replace("\\", "/")
+
     if not os.path.isdir(ret.input) and not ret.input.endswith(".nii"):
         raise ValueError("Input path provided is not in the supported '.nii' format or a directory.")
     if ret.output.endswith(".nii") or "." in ret.output.split("/")[-1]:
