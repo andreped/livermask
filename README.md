@@ -28,6 +28,12 @@ livermask --input path-to-input --output path-to-output
 | `--cpu`  | to disable the GPU (force computations on GPU only) |
 | `--verbose`  | to enable verbose |
 
+### Using code directly:
+If you wish to use the code directly (not as a CLI and without installing) you have to run the command:
+```
+python -m livermask.livermask --input path-to-input --output path-to-output
+```
+
 ## DICOM/NIfTI format
 Pipeline assumes input is in the NIfTI format, and output a binary volume in the same format (.nii).
 DICOM can be converted to NIfTI using the CLI [dcm2niix](https://github.com/rordenlab/dcm2niix), as such:
