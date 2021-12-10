@@ -7,27 +7,24 @@ with open("README.md", "r") as f:
 
 with open('requirements.txt', 'r', encoding='utf-16') as ff:
     required = ff.read().splitlines()
-
-# install additional dependencies (CuPy)
-#required.append(cupy-cuda110==9.6.0)
-
+    
 
 class InstallCommand(install):
     user_option = install.user_options 0 [
-        ('gpu=', None, 'enable flag to install package with GPU support'),
+        ('cupy=', 'cupy', 'enable flag to install package with GPU support'),
     ]
 
-    def initialize_options(self):          
-        install.initialize_options(self)   
-        self.gpu = False  
+    def initialize_options(self):
+        install.initialize_options(self)
+        self.cupy = "cupy"
 
-    def finalize_options(self):                   
-        print("value of gpu is ", self.gpu)
-        install.finalize_options(self)            
+    def finalize_options(self):
+        print("CuPY version selected is: ", self.cupy)
+        install.finalize_options(self)
 
-    def run(self):                                
-        if (self.)                  
-        install.run(self) 
+    def run(self): 
+        required.append(self.cupy)
+        install.run(self)
 
 
 setup(
