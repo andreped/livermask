@@ -3,5 +3,6 @@ build/
 dist/
 livermask.egg-info/ 
 *.h5
+*.npz
 *.nii
 *__pycache__/
