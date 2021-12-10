@@ -14,13 +14,13 @@ import pkg_resources
 import tensorflow as tf
 import logging as log
 import chainer
-from .utils import yaml_utils
 import math
-from .utils.unet3d import UNet3D
+from .unet3d import UNet3D
+import yaml_utils
 import yaml
 from tensorflow.keras import backend as K
 from numba import cuda
-from .utils.utils import load_vessel_model
+from .utils import load_vessel_model
 import multiprocessing as mp
 
 
