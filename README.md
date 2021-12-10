@@ -58,7 +58,20 @@ pip install --force-reinstall --no-deps git+https://github.com/andreped/livermas
 ```
 
 ## Acknowledgements
-If you found this tool helpful in your research, please, consider citing it. Information on how to cite can be found [here](https://zenodo.org/badge/latestdoi/238680374). 
+If you found this tool helpful in your research, please, consider citing it:
+<pre>
+  @software{andre_pedersen_2021_5773145,
+  author       = {André Pedersen},
+  title        = {andreped/livermask: v1.3.0},
+  month        = dec,
+  year         = 2021,
+  publisher    = {Zenodo},
+  version      = {v1.3.0},
+  doi          = {10.5281/zenodo.5773145},
+  url          = {https://doi.org/10.5281/zenodo.5773145}}
+</pre>
+
+Information on how to cite can be found [here](https://zenodo.org/badge/latestdoi/238680374).
 
 The model was trained on the LITS dataset. The dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org).
 
