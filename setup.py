@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
+import os
 
 
 with open("README.md", "r") as f:
@@ -40,7 +41,8 @@ setup(
      packages=find_packages(),
      entry_points={
         'console_scripts': [
-            'livermask = livermask.livermask:main'
+            'livermask = livermask.livermask:main',
+            'utils = livermask.utils',
         ]
      },
      install_requires=required,
@@ -54,4 +56,7 @@ setup(
      ],
      python_requires='>=3.6',
      cmdclass={'install': InstallCommand},
+     dependency_links=[
+        os.path.join(os.getcwd(), 'deps', 'my_package-1.0.0-py3.5.egg')
+     ]
  )
