@@ -27,6 +27,7 @@ livermask --input path-to-input --output path-to-output
 | `--output`  | the full path to the output data. Could be either output name or directory (if directory is provided as input)  |
 | `--cpu`  | to disable the GPU (force computations on GPU only) |
 | `--verbose`  | to enable verbose |
+| `vessels` | to segment vessels |
 
 ### Using code directly:
 If you wish to use the code directly (not as a CLI and without installing) you have to run the command:
