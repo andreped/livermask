@@ -20,10 +20,11 @@ class InstallCommand(install):
         self.cupy = "cupy"
 
     def finalize_options(self):
-        print("CuPY version selected is: ", self.cupy)
+        print("CuPy version selected is: ", self.cupy)
         install.finalize_options(self)
 
-    def run(self): 
+    def run(self):
+        global cupy
         required.append(self.cupy)
         install.run(self)
 
@@ -55,5 +56,4 @@ setup(
      ],
      python_requires='>=3.6',
      cmdclass={'install': InstallCommand},
-     #py_modules=['livermask.utils'],
  )
