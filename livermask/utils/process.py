@@ -135,7 +135,7 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     # read config
     config = Config(yaml.safe_load(open("./configs/base.yml")))
 
-    # read data
+    log.info("resize back...")
     nib_volume = nib.load(curr)
     new_spacing = [1., 1., 1.]
     resampled_volume = resample_to_output(nib_volume, new_spacing, order=1)
@@ -163,6 +163,7 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     prediction_map = np.zeros((ze + config.patch['patchside'], ye + config.patch['patchside'], xe + config.patch['patchside']))
     probability_map = np.zeros((config.unet['number_of_label'], ze+config.patch['patchside'], ye + config.patch['patchside'], xe + config.patch['patchside']))
 
+    log.info("predicting...")
     # Patch loop
     for s in tqdm(range(xm * ym * zm), ascii=True, desc='Patch loop', disable=not verbose):
         xi = int(s % xm) * config.patch['patchside']
@@ -192,7 +193,6 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
 
         prediction_map[zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'], xi:xi + config.patch['patchside']] = prediction_patch[0, :, :, :]
 
-    print('Save image')
     probability_map = probability_map[:, :ze, :ye, :xe]
     prediction_map = prediction_map[:ze, :ye, :xe]
 
