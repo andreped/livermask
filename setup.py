@@ -38,7 +38,7 @@ setup(
      long_description=long_description,
      long_description_content_type="text/markdown",
      url="https://github.com/andreped/livermask",
-     packages=find_packages(include=['livermask', 'livermask.utils.*', 'livermask.utils.*']),
+     packages=find_packages(include=['livermask', 'livermask.utils.*']),
      entry_points={
         'console_scripts': [
             'livermask = livermask.livermask:main',
