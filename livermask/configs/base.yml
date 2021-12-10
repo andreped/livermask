@@ -1,0 +1,22 @@
+batchsize: 10
+iteration: 55000
+iteration_decay_start: 50000
+seed: 0
+display_interval: 100
+snapshot_interval: 5000
+evaluation_interval: 5000
+
+patch:
+  patchside: 64
+
+unet:
+  fn: model.py
+  number_of_label: 2
+
+updater:
+  fn: updater.py
+
+adam:
+  alpha: 0.0001
+  beta1: 0.9
+  beta2: 0.999
