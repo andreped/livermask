@@ -1,9 +1,6 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
-import os, sys
-
-
-print("\n\n\n\n---:", sys.argv)
+import os
 
 
 with open("README.md", "r") as f:
@@ -13,30 +10,9 @@ with open('requirements.txt', 'r', encoding='utf-16') as ff:
     required = ff.read().splitlines()
 
 
-class InstallCommand(install):
-    user_option = install.user_options + [
-        ('cupyyy=', None, 'enable flag to install package with GPU support'),
-    ]
-
-    def initialize_options(self):
-        super().initialize_options()
-        self.cupy = "cupy"
-
-    def finalize_options(self):
-        print("CuPy version selected is: ", self.cupyyy)
-        super().finalize_options()
-
-    def run(self):
-        # use options
-        global cupy
-        required.append(self.cupy)
-
-        super().run()
-
-
 setup(
      name='livermask',  
-     version='1.2.0',
+     version='1.3.0',
      author="André Pedersen",
      author_email="andrped94@gmail.com",
      license='MIT',
