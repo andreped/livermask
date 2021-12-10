@@ -30,7 +30,7 @@ livermask --input path-to-input --output path-to-output
 | ------------------- | ------------- |
 | `--input`  | the full path to the input data. Could be nifti file or directory (if directory is provided as input) |
 | `--output`  | the full path to the output data. Could be either output name or directory (if directory is provided as input)  |
-| `--cpu`  | to disable the GPU (force computations on GPU only) |
+| `--cpu`  | to disable the GPU (force computations on CPU only) |
 | `--verbose`  | to enable verbose |
 | `--vessels` | to segment vessels |
 
