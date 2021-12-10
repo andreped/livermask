@@ -1,10 +1,7 @@
-#coding:utf-8
 import shutil
 import sys, os, time
 import yaml
 
-
-#sys.path.append(os.path.dirname(__file__))
 
 # Copy from tgans repo.
 class Config(object):

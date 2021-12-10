@@ -19,13 +19,11 @@ def get_vessel_model(output):
 def load_vessel_model(path, cpu):
     unet = UNet3D(num_of_label=2)
     chainer.serializers.load_npz(path, unet)
-
     if not cpu:
         chainer.cuda.get_device_from_id(0).use()
         unet.to_gpu()
 
     xp = unet.xp
-
     return unet, xp
 
 
