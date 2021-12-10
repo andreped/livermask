@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from setuptools.command.install import install
 
 
@@ -37,7 +37,7 @@ setup(
      long_description=long_description,
      long_description_content_type="text/markdown",
      url="https://github.com/andreped/livermask",
-     packages=setuptools.find_packages(),
+     packages=find_packages(),
      entry_points={
         'console_scripts': [
             'livermask = livermask.livermask:main'
