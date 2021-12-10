@@ -14,14 +14,14 @@ import tensorflow as tf
 import logging as log
 import chainer
 import math
-from utils.unet3d import UNet3D
+from .utils.unet3d import UNet3D
 import yaml
 from tensorflow.keras import backend as K
 from numba import cuda
-from utils.process import liver_segmenter_wrapper, vessel_segmenter, intensity_normalization
-from utils.utils import verboseHandler
+from .utils.process import liver_segmenter_wrapper, vessel_segmenter, intensity_normalization
+from .utils.utils import verboseHandler
 import logging as log
-from utils.utils import get_model, get_vessel_model
+from .utils.utils import get_model, get_vessel_model
 
 
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'  # due to this: https://github.com/tensorflow/tensorflow/issues/35029
