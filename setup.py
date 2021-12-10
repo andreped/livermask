@@ -38,7 +38,7 @@ setup(
      long_description=long_description,
      long_description_content_type="text/markdown",
      url="https://github.com/andreped/livermask",
-     packages=find_packages("livermask.utils"),
+     packages=find_packages(),
      entry_points={
         'console_scripts': [
             'livermask = livermask.livermask:main',
@@ -55,5 +55,5 @@ setup(
      ],
      python_requires='>=3.6',
      cmdclass={'install': InstallCommand},
-     py_modules=['livermask.utils']
+     py_modules=['livermask.utils'],
  )
