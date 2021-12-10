@@ -14,9 +14,9 @@ import pkg_resources
 import tensorflow as tf
 import logging as log
 import chainer
-import utils.yaml_utils  as yaml_utils
+import yaml_utils
 import math
-from utils.unet3d import UNet3D
+from .unet3d import UNet3D
 import yaml
 from tensorflow.keras import backend as K
 from numba import cuda

@@ -1,7 +1,7 @@
 import gdown
 import logging as log
 import chainer
-from unet3d import UNet3D
+from .unet3d import UNet3D
 
 
 def get_model(output):
