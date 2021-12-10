@@ -14,7 +14,7 @@ import tensorflow as tf
 import logging as log
 import chainer
 import math
-from unet3d import UNet3D
+from utils.unet3d import UNet3D
 import yaml
 from tensorflow.keras import backend as K
 from numba import cuda
