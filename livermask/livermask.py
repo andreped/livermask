@@ -1,11 +1,10 @@
-import numpy as np 
+import numpy as np
 import os, sys
 from tqdm import tqdm 
 import nibabel as nib
 from nibabel.processing import resample_to_output, resample_from_to
 from scipy.ndimage import zoom
 from tensorflow.python.keras.models import load_model
-import gdown
 from skimage.morphology import remove_small_holes, binary_dilation, binary_erosion, ball
 from skimage.measure import label, regionprops
 import warnings
@@ -13,51 +12,35 @@ import argparse
 import pkg_resources
 import tensorflow as tf
 import logging as log
+import chainer
+import math
+from unet3d import UNet3D
+import yaml
+from tensorflow.keras import backend as K
+from numba import cuda
+from utils.process import liver_segmenter_wrapper, vessel_segmenter, intensity_normalization
+from utils.utils import verboseHandler
+import logging as log
+from utils.utils import get_model, get_vessel_model
 
 
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'  # due to this: https://github.com/tensorflow/tensorflow/issues/35029
 warnings.filterwarnings('ignore', '.*output shape of zoom.*')  # mute some warnings
 
 
-def intensity_normalization(volume, intensity_clipping_range):
-    result = np.copy(volume)
-
-    result[volume < intensity_clipping_range[0]] = intensity_clipping_range[0]
-    result[volume > intensity_clipping_range[1]] = intensity_clipping_range[1]
-
-    min_val = np.amin(result)
-    max_val = np.amax(result)
-    if (max_val - min_val) != 0:
-        result = (result - min_val) / (max_val - min_val)
-    return result
-
-def post_process(pred):
-    return pred
-
-def get_model(output):
-    url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
-    md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
-    gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
-
-def verboseHandler(verbose):
-    if verbose:
-        log.basicConfig(format="%(levelname)s: %(message)s", level=log.DEBUG)
-        log.info("Verbose output.")
-    else:
-        log.basicConfig(format="%(levelname)s: %(message)s")
-
-def func(path, output, cpu, verbose):
+def func(path, output, cpu, verbose, vessels):
     # enable verbose or not
-    verboseHandler(verbose)
+    log = verboseHandler(verbose)
 
     cwd = "/".join(os.path.realpath(__file__).replace("\\", "/").split("/")[:-1]) + "/"
     name = cwd + "model.h5"
+    name_vessel = cwd + "model-hepatic_vessel.npz"
 
-    # get model
+    # get models
     get_model(name)
 
-    # load model
-    model = load_model(name, compile=False)
+    if vessels:
+        get_vessel_model(name_vessel)
 
     if not os.path.isdir(path):
         paths = [path]
@@ -73,76 +56,13 @@ def func(path, output, cpu, verbose):
         if not curr.endswith(".nii"):
             continue
 
-        log.info("preprocessing...")
-        nib_volume = nib.load(curr)
-        new_spacing = [1., 1., 1.]
-        resampled_volume = resample_to_output(nib_volume, new_spacing, order=1)
-        data = resampled_volume.get_data().astype('float32')
+        # perform liver parenchyma segmentation, launch it in separate process to properly clear memory
+        pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name)
 
-        curr_shape = data.shape
+        if vessels:
+            # perform liver vessel segmentation
+            vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel)
 
-        # resize to get (512, 512) output images
-        img_size = 512
-        data = zoom(data, [img_size / data.shape[0], img_size / data.shape[1], 1.0], order=1)
-
-        # intensity normalization
-        intensity_clipping_range = [-150, 250] # HU clipping limits (Pravdaray's configs)
-        data = intensity_normalization(volume=data, intensity_clipping_range=intensity_clipping_range)
-
-        # fix orientation
-        data = np.rot90(data, k=1, axes=(0, 1))
-        data = np.flip(data, axis=0)
-
-        log.info("predicting...")
-        # predict on data
-        pred = np.zeros_like(data).astype(np.float32)
-        for i in tqdm(range(data.shape[-1]), "pred: ", disable=not verbose):
-            pred[..., i] = model.predict(np.expand_dims(np.expand_dims(np.expand_dims(data[..., i], axis=0), axis=-1), axis=0))[0, ..., 1]
-        del data 
-
-        # threshold
-        pred = (pred >= 0.4).astype(int)
-
-        # fix orientation back
-        pred = np.flip(pred, axis=0)
-        pred = np.rot90(pred, k=-1, axes=(0, 1))
-
-        log.info("resize back...")
-        # resize back from 512x512
-        pred = zoom(pred, [curr_shape[0] / img_size, curr_shape[1] / img_size, 1.0], order=1)
-        pred = (pred >= 0.5).astype(bool)
-
-        log.info("morphological post-processing...")
-        # morpological post-processing
-        # 1) first erode
-        pred = binary_erosion(pred, ball(3)).astype(np.int32)
-
-        # 2) keep only largest connected component
-        labels = label(pred)
-        regions = regionprops(labels)
-        area_sizes = []
-        for region in regions:
-            area_sizes.append([region.label, region.area])
-        area_sizes = np.array(area_sizes)
-        tmp = np.zeros_like(pred)
-        tmp[labels == area_sizes[np.argmax(area_sizes[:, 1]), 0]] = 1
-        pred = tmp.copy()
-        del tmp, labels, regions, area_sizes
-
-        # 3) dilate
-        pred = binary_dilation(pred.astype(bool), ball(3))
-
-        # 4) remove small holes
-        pred = remove_small_holes(pred.astype(bool), area_threshold=0.001 * np.prod(pred.shape))
-
-        log.info("saving...")
-        pred = pred.astype(np.uint8)
-        img = nib.Nifti1Image(pred, affine=resampled_volume.affine)
-        resampled_lab = resample_from_to(img, nib_volume, order=0)
-        if multiple_flag:
-            nib.save(resampled_lab, output + "/" + curr.split("/")[-1].split(".")[0] + "-livermask" + ".nii")
-        else:
-            nib.save(resampled_lab, output + ".nii")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -154,6 +74,8 @@ def main():
                     help="force using the CPU even if a GPU is available.")
     parser.add_argument('--verbose', action='store_true',
                     help="enable verbose.")
+    parser.add_argument('--vessels', action='store_true',
+                    help="segment vessels.")
     ret = parser.parse_args(sys.argv[1:]); print(ret)
 
     if ret.cpu:

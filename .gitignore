@@ -4,3 +4,4 @@ dist/
 livermask.egg-info/ 
 *.h5
 *.nii
+*__pycache__/
