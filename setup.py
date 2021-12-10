@@ -42,7 +42,7 @@ setup(
      entry_points={
         'console_scripts': [
             'livermask = livermask.livermask:main',
-            'unet3d = livermask.unet3d'
+            'unet3d = livermask.unet3d',
             'utils = livermask.utils',
         ]
      },
