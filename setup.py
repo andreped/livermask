@@ -55,5 +55,5 @@ setup(
      ],
      python_requires='>=3.6',
      cmdclass={'install': InstallCommand},
-     py_modules=['livermask.utils'],
+     #py_modules=['livermask.utils'],
  )
