@@ -35,7 +35,7 @@ livermask --input path-to-input --output path-to-output
 | `--vessels` | to segment vessels |
 
 ### Using code directly:
-If you wish to use the code directly (not as a CLI and without installing) you have to run the command:
+If you wish to use the code directly (not as a CLI and without installing), you can run this command:
 ```
 python -m livermask.livermask --input path-to-input --output path-to-output
 ```
