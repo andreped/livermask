@@ -135,7 +135,8 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     unet, xp = load_vessel_model(name_vessel, cpu)
 
     # read config
-    config = Config(yaml.safe_load(open("./configs/base.yml")))
+    log.info("current file path:")
+    config = Config(yaml.safe_load(open(os.path.dirname(os.path.abspath(__file__)) + "/configs/base.yml")))
 
     log.info("resize back...")
     nib_volume = nib.load(curr)
