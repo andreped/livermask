@@ -1,1 +1,1 @@
-include *.yml
+recursive-include livermask/configs *
