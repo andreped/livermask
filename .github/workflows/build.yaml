@@ -51,9 +51,7 @@ jobs:
 
       - name: Test inference
         run: |
-          ls
-          livermask --input samples/test-volume.nii --output test-output --verbose
-          ls
+          livermask --input samples/test-volume.nii --output test-output --verbose --vessels
 
       - name: Upload Python wheel
         uses: actions/upload-artifact@v2
