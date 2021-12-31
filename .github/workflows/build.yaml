@@ -48,10 +48,11 @@ jobs:
           mkdir samples
           cd samples
           gdown https://drive.google.com/uc?id=1shjSrFjS4PHE5sTku30PZTLPZpGu24o3
+          gdown https://drive.google.com/uc?id=1bNmls5o0Rxw5HvBF1IYnEzmpysYJaywN
 
       - name: Test inference
         run: |
-          livermask --input samples/test-volume.nii --output test-output --verbose --vessels
+          livermask --input samples --output samples --verbose --vessels
 
       - name: Upload Python wheel
         uses: actions/upload-artifact@v2
