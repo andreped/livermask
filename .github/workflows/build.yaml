@@ -42,6 +42,19 @@ jobs:
       - name: Test CLI
         run: livermask --help
 
+      - name: Download test sample
+        run: |
+          pip install gdown
+          mkdir samples
+          cd samples
+          gdown https://drive.google.com/uc?id=1shjSrFjS4PHE5sTku30PZTLPZpGu24o3
+
+      - name: Test inference
+        run: |
+          ls
+          livermask --input test-volume.nii --output test-output
+          ls
+
       - name: Upload Python wheel
         uses: actions/upload-artifact@v2
         with:
