@@ -131,6 +131,14 @@ def liver_segmenter(params):
 
 def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name_vessel):
 
+    # check if cupy is available, if not, set cpu=True
+    try:
+        import cupy
+    except ModuleNotFoundError as e:
+        log.info(e)
+        log.info("cupy is not available. Setting cpu=True")
+        cpu = True
+
     # load model
     unet, xp = load_vessel_model(name_vessel, cpu)
 
