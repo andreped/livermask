@@ -39,9 +39,11 @@ def intensity_normalization(volume, intensity_clipping_range):
 
 def liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name):
     # run inference in a different process
-    p = mp.Pool(processes=1, maxtasksperchild=1)  # , initializer=initializer)
-    result = p.map_async(liver_segmenter, ((curr, output, cpu, verbose, multiple_flag, name), ))
-    return result.get()[0]
+    with mp.Pool(processes=1, maxtasksperchild=1) as p:  # , initializer=initializer)
+        result = p.map_async(liver_segmenter, ((curr, output, cpu, verbose, multiple_flag, name), ))
+        log.info("getting result from process...")
+        ret = result.get()[0]
+    return ret
 
 
 def liver_segmenter(params):
