@@ -24,6 +24,7 @@ setup(
         include=[
             'livermask', 
             'livermask.utils',
+            'livermask.configs'
         ]
     ),
      entry_points={
