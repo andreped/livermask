@@ -11,9 +11,9 @@
 pip install git+https://github.com/andreped/livermask.git
 ```
 
-As TensorFlow 2.4 only supports Python 3.6-3.8, so does livermask.
+As TensorFlow 2.4 only supports Python 3.6-3.8, so does livermask. Note that livermask is **not** made to be compatible with conda. Please, use pip for installing livermask.
 
-To add GPU inference support for liver vessel segmentation (which uses Chainer and CuPy), you need to install [CuPy](https://github.com/cupy/cupy). This can be easily done by adding `cupy-cudaX`, where `X` is the CUDA version you have installed, for instance `cupy-cuda110` for CUDA-11.0:
+(Optional) To add GPU inference support for liver vessel segmentation (which uses Chainer and CuPy), you need to install [CuPy](https://github.com/cupy/cupy). This can be easily done by adding `cupy-cudaX`, where `X` is the CUDA version you have installed, for instance `cupy-cuda110` for CUDA-11.0:
 ```
 pip install cupy-cuda110
 ```
@@ -56,6 +56,8 @@ If the program struggles to install, attempt to install using:
 ```
 pip install --force-reinstall --no-deps git+https://github.com/andreped/livermask.git
 ```
+
+If you get the issue `ImportError: numpy.core.multiarray failed to import`, it might be because you tried to use [conda](https://docs.conda.io/en/latest/) instead of pip for installing. livermask is not made to be compatible with Conda. Please, use pip. See [this thread](https://github.com/andreped/livermask/issues/12) for more information.
 
 ## Acknowledgements
 If you found this tool helpful in your research, please, consider citing it:
