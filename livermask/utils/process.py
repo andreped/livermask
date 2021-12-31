@@ -176,7 +176,7 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
 
     log.info("predicting...")
     # Patch loop
-    for s in tqdm(range(xm * ym * zm), ascii=True, desc='Patch loop', disable=not verbose):
+    for s in tqdm(range(xm * ym * zm), 'Patch loop', disable=not verbose):
         xi = int(s % xm) * config.patch['patchside']
         yi = int((s % (ym * xm)) / xm) * config.patch['patchside']
         zi = int(s / (ym * xm)) * config.patch['patchside']
