@@ -20,11 +20,12 @@ setup(
      long_description=long_description,
      long_description_content_type="text/markdown",
      url="https://github.com/andreped/livermask",
+     include_package_data=True,
      packages=find_packages(
         include=[
             'livermask', 
             'livermask.utils',
-            'livermask.configs'
+            'livermask.configs',
         ]
     ),
      entry_points={
