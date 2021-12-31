@@ -211,8 +211,11 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     #prediction_map = prediction_map + liver_mask
     #prediction_map[prediction_map > 0] = 1
 
-    log.info("saving...")
+    # filter segmented vessels outside the predicted liver parenchyma
     pred = prediction_map.astype(np.uint8)
+    pred[liver_mask == 0] = 0
+
+    log.info("saving...")
     img = nib.Nifti1Image(pred, affine=resampled_volume.affine)
     resampled_lab = resample_from_to(img, nib_volume, order=0)
     if multiple_flag:
