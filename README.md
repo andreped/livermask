@@ -62,15 +62,15 @@ If you get the issue `ImportError: numpy.core.multiarray failed to import`, it m
 ## Acknowledgements
 If you found this tool helpful in your research, please, consider citing it:
 <pre>
-  @software{andre_pedersen_2021_5773145,
+  @software{andre_pedersen_2021_5812222,
   author       = {André Pedersen},
-  title        = {andreped/livermask: v1.3.0},
+  title        = {andreped/livermask: v1.3.1},
   month        = dec,
   year         = 2021,
   publisher    = {Zenodo},
-  version      = {v1.3.0},
-  doi          = {10.5281/zenodo.5773145},
-  url          = {https://doi.org/10.5281/zenodo.5773145}}
+  version      = {v1.3.1},
+  doi          = {10.5281/zenodo.5812222},
+  url          = {https://doi.org/10.5281/zenodo.5812222}}
 </pre>
 
 Information on how to cite can be found [here](https://zenodo.org/badge/latestdoi/238680374).
