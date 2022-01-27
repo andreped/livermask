@@ -3,11 +3,11 @@ from setuptools.command.install import install
 import os
 
 
-with open("README.md", "r") as f:
+with open("README.md", "r", errors='ignore') as f:
     long_description = f.read()
 
-with open('requirements.txt', 'r') as ff:
-    required = ff.read().decode("utf-16").splitlines()
+with open('requirements.txt', 'r', encoding='utf-16', errors='ignore') as ff:
+    required = ff.read().splitlines()
 
 
 setup(
