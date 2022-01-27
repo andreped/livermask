@@ -4,7 +4,7 @@ import os
 
 
 with open("README.md", "r") as f:
-    long_description = f.read().decode("utf-16")
+    long_description = f.read()
 
 with open('requirements.txt', 'r') as ff:
     required = ff.read().decode("utf-16").splitlines()
