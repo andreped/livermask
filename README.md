@@ -9,7 +9,7 @@
 ## Install
 
 ```
-pip install git+https://github.com/andreped/livermask.git
+pip install livermask
 ```
 
 As TensorFlow 2.4 only supports Python 3.6-3.8, so does livermask. Note that livermask is **not** made to be compatible with conda. Please, use pip for installing livermask.
