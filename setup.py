@@ -3,7 +3,7 @@ from setuptools.command.install import install
 import os
 
 
-with open("README.md", "r") as f:
+with open("README.md", "rb") as f:
     long_description = f.read()
 
 with open('requirements.txt', 'rb') as ff:
