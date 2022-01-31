@@ -26,6 +26,11 @@ As TensorFlow 2.4 only supports Python 3.6-3.8, so does livermask. Note that liv
 pip install cupy-cuda110
 ```
 
+(DEBUG) If you experience issues with numpy, after installing CuPy, try reinstalling CuPy with this extension:
+```
+pip install 'cupy-cuda110>=7.7.0,<8.0.0'
+```
+
 Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 18.04.
 
 ## Usage:
