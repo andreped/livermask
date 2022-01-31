@@ -12,7 +12,7 @@ with open('requirements.txt', 'r', encoding='utf-16', errors='ignore') as ff:
 
 setup(
      name='livermask',  
-     version='1.3.1',
+     version='1.3.2',
      author="André Pedersen",
      author_email="andrped94@gmail.com",
      license='MIT',
