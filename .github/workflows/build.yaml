@@ -44,7 +44,7 @@ jobs:
 
       - name: Download test sample
         run: |
-          pip install gdown
+          pip install gdown==3.13.0
           mkdir samples
           cd samples
           gdown https://drive.google.com/uc?id=1shjSrFjS4PHE5sTku30PZTLPZpGu24o3
