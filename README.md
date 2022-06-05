@@ -3,6 +3,8 @@
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
 [![Build Actions Status](https://github.com/andreped/livermask/workflows/Build/badge.svg)](https://github.com/andreped/livermask/actions)
 [![DOI](https://zenodo.org/badge/238680374.svg)](https://zenodo.org/badge/latestdoi/238680374)
+[![GitHub Downloads](https://img.shields.io/github/downloads/andreped/livermask/total?label=GitHub%20downloads&logo=github)](https://github.com/andreped/livermask/releases)
+[![Pip Downloads](https://img.shields.io/pypi/dm/livermask?label=pip%20downloads&logo=python)](https://pypi.org/project/livermask/)
 
 ⚠️***Latest: livermask is now on [PyPI](https://pypi.org/project/livermask/)!***
 
