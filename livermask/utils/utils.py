@@ -7,7 +7,7 @@ from .unet3d import UNet3D
 def get_model(output):
     url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
     md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
-    gdown.cached_download(url, output, md5=md5) #, postprocess=gdown.extractall)
+    gdown.cached_download(url, output) #, md5=md5) #, postprocess=gdown.extractall)
 
 
 def get_vessel_model(output):
