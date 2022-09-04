@@ -75,4 +75,16 @@ jobs:
           name: "Python wheel"
 
       - name: Install wheel
-        run: pip install --find-links=${{github.workspace}} gradient_accumulator
+        run: pip install --find-links=${{github.workspace}} livermask
+
+      - name: Download test sample
+        run: |
+          pip install gdown==4.4.0
+          mkdir samples
+          cd samples
+          gdown https://drive.google.com/uc?id=1shjSrFjS4PHE5sTku30PZTLPZpGu24o3
+          gdown https://drive.google.com/uc?id=1bNmls5o0Rxw5HvBF1IYnEzmpysYJaywN
+
+      - name: Test inference
+        run: |
+          livermask --input samples --output samples --verbose --vessels
