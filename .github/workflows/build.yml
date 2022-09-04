@@ -62,6 +62,7 @@ jobs:
           if-no-files-found: error
 
   conda:
+    needs: build
     runs-on: ubuntu-20.04
     steps:
       - uses: conda-incubator/setup-miniconda@v2
