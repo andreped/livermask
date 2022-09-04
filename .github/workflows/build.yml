@@ -60,3 +60,19 @@ jobs:
           name: Python wheel
           path: ${{github.workspace}}/dist/livermask-*.whl
           if-no-files-found: error
+
+  conda:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: 3.7
+
+      - name: Download artifact
+        uses: actions/download-artifact@master
+        with:
+          name: "Python wheel"
+
+      - name: Install wheel
+        run: pip install --find-links=${{github.workspace}} gradient_accumulator
