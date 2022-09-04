@@ -9,20 +9,6 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-18.04
-            TARGET: ubuntu
-            CMD_BUILD: pip install git+https://github.com/andreped/livermask.git
-
-          - os: macos-10.15
-            TARGET: macos
-            CMD_BUILD: pip install git+https://github.com/andreped/livermask.git
-
-          - os: windows-2019
-            TARGET: windows
-            CMD_BUILD: pip install git+https://github.com/andreped/livermask.git
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python 3.7
@@ -36,8 +22,36 @@ jobs:
       - name: Build wheel
         run: python setup.py bdist_wheel --universal
 
-      - name: Install program for ${{matrix.TARGET}}
-        run: ${{matrix.CMD_BUILD}}
+      - name: Upload Python wheel
+        uses: actions/upload-artifact@v2
+        with:
+          name: Python wheel
+          path: ${{github.workspace}}/dist/livermask-*.whl
+          if-no-files-found: error
+
+  test:
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      # max-parallel: 10
+      matrix:
+        os: [ windows-2019, ubuntu-20.04, macos-11 ]
+        python-version: [ 3.7 ]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@master
+        with:
+          name: "Python wheel"
+
+      - name: Install wheel
+        run: pip install --find-links=${{github.workspace}} livermask
 
       - name: Test CLI
         run: livermask --help
@@ -53,13 +67,6 @@ jobs:
       - name: Test inference
         run: |
           livermask --input samples --output samples --verbose --vessels
-
-      - name: Upload Python wheel
-        uses: actions/upload-artifact@v2
-        with:
-          name: Python wheel
-          path: ${{github.workspace}}/dist/livermask-*.whl
-          if-no-files-found: error
 
   conda:
     needs: build
