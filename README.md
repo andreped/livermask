@@ -8,7 +8,7 @@
 [![GitHub Downloads](https://img.shields.io/github/downloads/andreped/livermask/total?label=GitHub%20downloads&logo=github)](https://github.com/andreped/livermask/releases)
 [![Pip Downloads](https://img.shields.io/pypi/dm/livermask?label=pip%20downloads&logo=python)](https://pypi.org/project/livermask/)
  
-**livermask** was developed by SINTEF Medical Technology to provide an open tool for liver parenchyma segmentation to accelerate research.
+**livermask** was developed by SINTEF Medical Technology to provide an open tool to accelerate research.
 
 <img src="figures/Segmentation_3DSlicer.PNG" width="70%">
 </div>
