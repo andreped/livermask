@@ -6,3 +6,4 @@ livermask.egg-info/
 *.npz
 *.nii
 *__pycache__/
+.idea/
