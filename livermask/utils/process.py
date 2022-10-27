@@ -1,6 +1,6 @@
 import numpy as np
 import os, sys
-from tqdm import tqdm 
+from tqdm import tqdm
 import nibabel as nib
 from nibabel.processing import resample_to_output, resample_from_to
 from scipy.ndimage import zoom
@@ -41,7 +41,7 @@ def liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name):
     # run inference in a different process
     mp.set_start_method('spawn', force=True)
     with mp.Pool(processes=1, maxtasksperchild=1) as p:  # , initializer=initializer)
-        result = p.map_async(liver_segmenter, ((curr, output, cpu, verbose, multiple_flag, name), ))
+        result = p.map_async(liver_segmenter, ((curr, output, cpu, verbose, multiple_flag, name),))
         log.info("getting result from process...")
         ret = result.get()[0]
     return ret
@@ -67,7 +67,7 @@ def liver_segmenter(params):
         data = zoom(data, [img_size / data.shape[0], img_size / data.shape[1], 1.0], order=1)
 
         # intensity normalization
-        intensity_clipping_range = [-150, 250] # HU clipping limits (Pravdaray's configs)
+        intensity_clipping_range = [-150, 250]  # HU clipping limits (Pravdaray's configs)
         data = intensity_normalization(volume=data, intensity_clipping_range=intensity_clipping_range)
 
         # fix orientation
@@ -78,8 +78,10 @@ def liver_segmenter(params):
         # predict on data
         pred = np.zeros_like(data).astype(np.float32)
         for i in tqdm(range(data.shape[-1]), "pred: ", disable=not verbose):
-            pred[..., i] = model.predict(np.expand_dims(np.expand_dims(np.expand_dims(data[..., i], axis=0), axis=-1), axis=0))[0, ..., 1]
-        del data 
+            pred[..., i] = \
+            model.predict(np.expand_dims(np.expand_dims(np.expand_dims(data[..., i], axis=0), axis=-1), axis=0))[
+                0, ..., 1]
+        del data
 
         # threshold
         pred = (pred >= 0.4).astype(int)
@@ -123,7 +125,7 @@ def liver_segmenter(params):
         if multiple_flag:
             nib.save(resampled_lab, output + "/" + curr.split("/")[-1].split(".")[0] + "-livermask.nii")
         else:
-            nib.save(resampled_lab, output  + "-livermask.nii")
+            nib.save(resampled_lab, output + "-livermask.nii")
 
         return pred
     except KeyboardInterrupt:
@@ -131,7 +133,6 @@ def liver_segmenter(params):
 
 
 def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name_vessel):
-
     # check if cupy is available, if not, set cpu=True
     try:
         import cupy
@@ -150,7 +151,7 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     nib_volume = nib.load(curr)
     new_spacing = [1., 1., 1.]
     resampled_volume = resample_to_output(nib_volume, new_spacing, order=1)
-    #resampled_volume = nib_volume
+    # resampled_volume = nib_volume
     org = resampled_volume.get_data().astype('float32')
 
     # HU clipping
@@ -159,10 +160,10 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     org[org > intensity_clipping_range[1]] = intensity_clipping_range[1]
 
     # Calculate maximum of number of patch at each side
-    ze,ye,xe = org.shape
-    xm = int(math.ceil((float(xe)/float(config.patch['patchside']))))
-    ym = int(math.ceil((float(ye)/float(config.patch['patchside']))))
-    zm = int(math.ceil((float(ze)/float(config.patch['patchside']))))
+    ze, ye, xe = org.shape
+    xm = int(math.ceil((float(xe) / float(config.patch['patchside']))))
+    ym = int(math.ceil((float(ye) / float(config.patch['patchside']))))
+    zm = int(math.ceil((float(ze) / float(config.patch['patchside']))))
 
     margin = ((0, config.patch['patchside']),
               (0, config.patch['patchside']),
@@ -171,8 +172,10 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     org = chainer.Variable(xp.array(org[np.newaxis, np.newaxis, :], dtype=xp.float32))
 
     # init prediction array
-    prediction_map = np.zeros((ze + config.patch['patchside'], ye + config.patch['patchside'], xe + config.patch['patchside']))
-    probability_map = np.zeros((config.unet['number_of_label'], ze+config.patch['patchside'], ye + config.patch['patchside'], xe + config.patch['patchside']))
+    prediction_map = np.zeros(
+        (ze + config.patch['patchside'], ye + config.patch['patchside'], xe + config.patch['patchside']))
+    probability_map = np.zeros((config.unet['number_of_label'], ze + config.patch['patchside'],
+                                ye + config.patch['patchside'], xe + config.patch['patchside']))
 
     log.info("predicting...")
     # Patch loop
@@ -182,34 +185,38 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
         zi = int(s / (ym * xm)) * config.patch['patchside']
 
         # check if current region contains any liver mask, if not, skip
-        parenchyma_patch = liver_mask[zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'], xi:xi + config.patch['patchside']]
-        #if np.count_nonzero(parenchyma_patch) == 0:
+        parenchyma_patch = liver_mask[zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'],
+                                      xi:xi + config.patch['patchside']]
+        # if np.count_nonzero(parenchyma_patch) == 0:
         if np.mean(parenchyma_patch) < 0.25:
             continue
 
         # Extract patch from original image
-        patch = org[:, :, zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'], xi:xi + config.patch['patchside']]
+        patch = org[:, :, zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'],
+                    xi:xi + config.patch['patchside']]
         with chainer.using_config('train', False), chainer.using_config('enable_backprop', False):
             probability_patch = unet(patch)
 
         # Generate probability map
         probability_patch = probability_patch.data
-        #if args.gpu >= 0:
+        # if args.gpu >= 0:
         if not cpu:
             probability_patch = chainer.cuda.to_cpu(probability_patch)
         for ch in range(probability_patch.shape[1]):
-            probability_map[ch, zi:zi + config.patch['patchside'],yi:yi + config.patch['patchside'], xi:xi + config.patch['patchside']] = probability_patch[0, ch, :, :, :]
+            probability_map[ch, zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'],
+                            xi:xi + config.patch['patchside']] = probability_patch[0, ch, :, :, :]
 
         prediction_patch = np.argmax(probability_patch, axis=1)
 
-        prediction_map[zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'], xi:xi + config.patch['patchside']] = prediction_patch[0, :, :, :]
+        prediction_map[zi:zi + config.patch['patchside'], yi:yi + config.patch['patchside'],
+                       xi:xi + config.patch['patchside']] = prediction_patch[0, :, :, :]
 
-    probability_map = probability_map[:, :ze, :ye, :xe]
+    # probability_map = probability_map[:, :ze, :ye, :xe]
     prediction_map = prediction_map[:ze, :ye, :xe]
 
     # post-process prediction
-    #prediction_map = prediction_map + liver_mask
-    #prediction_map[prediction_map > 0] = 1
+    # prediction_map = prediction_map + liver_mask
+    # prediction_map[prediction_map > 0] = 1
 
     # filter segmented vessels outside the predicted liver parenchyma
     pred = prediction_map.astype(np.uint8)

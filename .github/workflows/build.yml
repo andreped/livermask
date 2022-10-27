@@ -88,10 +88,6 @@ jobs:
 
       - name: Install wheel
         run: |
-          python -V
-          python3 -V
-          pip -V
-          pip3 -V
           pip3 install --find-links=${{github.workspace}} livermask
 
       - name: Download test sample

@@ -1,5 +1,6 @@
 import numpy as np
-import os, sys
+import os
+import sys
 from tqdm import tqdm 
 import nibabel as nib
 from nibabel.processing import resample_to_output, resample_from_to
