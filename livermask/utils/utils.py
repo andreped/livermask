@@ -6,14 +6,12 @@ from .unet3d import UNet3D
 
 def get_model(output):
     url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
-    md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
-    gdown.cached_download(url, output) #, md5=md5) #, postprocess=gdown.extractall)
+    gdown.cached_download(url, output)
 
 
 def get_vessel_model(output):
     url = "https://drive.google.com/uc?id=1-8VNoRmIeiF1uIuWBqmZXz_6dIQFSAxN"
-    #md5 = "ef5a6dfb794b39bea03f5496a9a49d4d"
-    gdown.cached_download(url, output) #, md5=md5)
+    gdown.cached_download(url, output)
 
 
 def load_vessel_model(path, cpu):
@@ -22,7 +20,6 @@ def load_vessel_model(path, cpu):
     if not cpu:
         chainer.cuda.get_device_from_id(0).use()
         unet.to_gpu()
-
     xp = unet.xp
     return unet, xp
 

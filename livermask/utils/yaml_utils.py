@@ -1,13 +1,8 @@
-import shutil
-import sys, os, time
 import yaml
 
 
-# Copy from tgans repo.
+# https://github.com/pfnet-research/sngan_projection/blob/master/source/yaml_utils.py
 class Config(object):
-    '''
-    'https://github.com/pfnet-research/sngan_projection/blob/master/source/yaml_utils.py'
-    '''
     def __init__(self, config_dict):
         self.config = config_dict
 
