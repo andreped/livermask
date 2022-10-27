@@ -70,7 +70,11 @@ jobs:
 
   conda:
     needs: build
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-2019, ubuntu-20.04, macos-11 ]
+        python-version: [ 3.7 ]
     steps:
       - uses: conda-incubator/setup-miniconda@v2
         with:
