@@ -87,7 +87,12 @@ jobs:
           name: "Python wheel"
 
       - name: Install wheel
-        run: pip install --find-links=${{github.workspace}} livermask
+        run: |
+          python -V
+          python3 -V
+          pip -V
+          pip3 -V
+          pip install --find-links=${{github.workspace}} livermask
 
       - name: Download test sample
         run: |
