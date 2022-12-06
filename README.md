@@ -94,7 +94,3 @@ If you found this tool helpful in your research, please, consider citing it:
 Information on how to cite can be found [here](https://zenodo.org/badge/latestdoi/238680374).
 
 The model was trained on the LITS dataset. The dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org/competitions/17094).
-
-------
-
-Made with :heart: and python
