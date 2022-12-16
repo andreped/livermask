@@ -1,7 +1,8 @@
 venv/
 build/
 dist/
-livermask.egg-info/ 
+livermask.egg-info/
+*.DS_Store
 *.h5
 *.npz
 *.nii
