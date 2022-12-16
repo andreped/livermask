@@ -80,15 +80,15 @@ pip install --force-reinstall --no-deps git+https://github.com/andreped/livermas
 ## Acknowledgements
 If you found this tool helpful in your research, please, consider citing it:
 <pre>
-  @software{andre_pedersen_2021_5812222,
+  @software{andre_pedersen_2022_7448865,
   author       = {André Pedersen},
-  title        = {andreped/livermask: v1.3.1},
+  title        = {andreped/livermask: v1.4.0},
   month        = dec,
-  year         = 2021,
+  year         = 2022,
   publisher    = {Zenodo},
-  version      = {v1.3.1},
-  doi          = {10.5281/zenodo.5812222},
-  url          = {https://doi.org/10.5281/zenodo.5812222}}
+  version      = {v1.4.0},
+  doi          = {10.5281/zenodo.7448865},
+  url          = {https://doi.org/10.5281/zenodo.7448865}}
 </pre>
 
 Information on how to cite can be found [here](https://zenodo.org/badge/latestdoi/238680374).
