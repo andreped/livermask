@@ -53,7 +53,8 @@ jobs:
       - name: Install wheel
         if: runner.os == 'Windows'
         run: |
-              $TARGET = Resolve-Path "${{github.workspace}}/livermask-*.whl" | Select -ExpandProperty Path &&
+              $TARGET = Resolve-Path "${{github.workspace}}/livermask-*.whl" | Select -ExpandProperty Path
+              echo $TARGET
               pip install --find-links=${{github.workspace}} $TARGET
 
       - name: Install wheel
