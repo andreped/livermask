@@ -2,11 +2,12 @@ import gdown
 import logging as log
 import chainer
 from .unet3d import UNet3D
+from .fetch import download
 
 
 def get_model(output):
-    url = "https://drive.google.com/uc?id=12or5Q79at2BtLgQ7IaglNGPFGRlEgEHc"
-    gdown.cached_download(url, output)
+    url = "https://github.com/andreped/livermask/releases/download/trained-models-v1/model.h5"
+    download(url, output)
 
 
 def get_vessel_model(output):
