@@ -35,7 +35,7 @@ jobs:
     strategy:
       # max-parallel: 10
       matrix:
-        os: [ ubuntu-20.04 ] #[ windows-2019, ubuntu-20.04, macos-11 ]
+        os: [ windows-2019, ubuntu-20.04, macos-11 ]
         python-version: [ 3.7 ]
 
     steps:
@@ -51,7 +51,7 @@ jobs:
           name: "Python wheel"
 
       - name: Install wheel
-        run: ls -haltr && pip install --find-links=${{github.workspace}} livermask-*.whl
+        run: pip install --find-links=${{github.workspace}} livermask-*.whl
 
       - name: Test CLI
         run: livermask --help
@@ -88,7 +88,7 @@ jobs:
 
       - name: Install wheel
         run: |
-          pip3 install --find-links=${{github.workspace}} livermask
+          pip3 install --find-links=${{github.workspace}} livermask-*.whl
 
       - name: Download test sample
         run: |
