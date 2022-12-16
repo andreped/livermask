@@ -51,7 +51,7 @@ jobs:
           name: "Python wheel"
 
       - name: Install wheel
-        run: ls -haltr && pip install --find-links=${{github.workspace}} livermask
+        run: ls -haltr && pip install --find-links=${{github.workspace}} livermask-*.whl
 
       - name: Test CLI
         run: livermask --help
