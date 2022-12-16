@@ -10,7 +10,7 @@ with open('requirements.txt', 'r', encoding='utf-16', errors='ignore') as ff:
 
 setup(
     name='livermask',
-    version='1.3.3',
+    version='1.4.0',
     author="André Pedersen",
     author_email="andrped94@gmail.com",
     license='MIT',
@@ -36,6 +36,9 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
