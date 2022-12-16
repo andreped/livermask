@@ -3,11 +3,24 @@ import logging as log
 import chainer
 from .unet3d import UNet3D
 from .fetch import download
+import os
+from tensorflow.python.keras.models import load_model
 
 
 def get_model(output):
     url = "https://github.com/andreped/livermask/releases/download/trained-models-v1/model.h5"
-    download(url, output)
+    
+    if os.path.exists(output):
+        try:
+            model = load_model(output, compile=False)
+            del model
+        except OSError as e:
+            print(e)
+            print("Model failed to load. Trying to delete old model and redownload. This might take a while...")
+            os.remove(output)
+            download(url, output)
+    else:
+        download(url, output)
 
 
 def get_vessel_model(output):
