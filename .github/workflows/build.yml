@@ -51,14 +51,15 @@ jobs:
           name: "Python wheel"
 
       - name: Install wheel
+        if: runner.os == "Windows"
         run: |
-          if: [ "$RUNNER_OS" == "Windows" ]; then
               $TARGET = Resolve-Path "${{github.workspace}}/livermask-*.whl" | Select -ExpandProperty Path &&
               pip install --find-links=${{github.workspace}} $TARGET
-          else:
-              pip install --find-links=${{github.workspace}} livermask-*.whl
-          fi
-        shell: bash
+
+      - name: Install wheel
+        if: runner.os != "Windows"
+        run: pip install --find-links=${{github.workspace}} livermask-*.whl
+
 
       - name: Test CLI
         run: livermask --help
