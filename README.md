@@ -53,6 +53,7 @@ livermask --input path-to-input --output path-to-output
 | `--cpu`  | to disable the GPU (force computations on CPU only) |
 | `--verbose`  | to enable verbose |
 | `--vessels` | to segment vessels |
+| `--extension` | of the output file (default: .nii) |
 
 ### Using code directly:
 If you wish to use the code directly (not as a CLI and without installing), you can run this command:
