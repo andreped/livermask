@@ -54,15 +54,15 @@ def func(path, output, cpu, verbose, vessels, extension):
 
     for curr in tqdm(paths, "CT:"):
         # check if current file is a nifti file, if not, skip
-        if not curr.endswith(".nii") or not curr.endswith(".nii.gz"):
-            continue
+        if curr.endswith(".nii") or curr.endswith(".nii.gz"):
+            # perform liver parenchyma segmentation, launch it in separate process to properly clear memory
+            pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name, extension)
 
-        # perform liver parenchyma segmentation, launch it in separate process to properly clear memory
-        pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name, extension)
-
-        if vessels:
-            # perform liver vessel segmentation
-            vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel, extension)
+            if vessels:
+                # perform liver vessel segmentation
+                vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel, extension)
+        else:
+            pass
 
 
 def main():
