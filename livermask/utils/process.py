@@ -37,11 +37,11 @@ def intensity_normalization(volume, intensity_clipping_range):
     return result
 
 
-def liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name):
+def liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name, extension):
     # run inference in a different process
     mp.set_start_method('spawn', force=True)
     with mp.Pool(processes=1, maxtasksperchild=1) as p:  # , initializer=initializer)
-        result = p.map_async(liver_segmenter, ((curr, output, cpu, verbose, multiple_flag, name),))
+        result = p.map_async(liver_segmenter, ((curr, output, cpu, verbose, multiple_flag, name, extension),))
         log.info("getting result from process...")
         ret = result.get()[0]
     return ret
@@ -49,7 +49,7 @@ def liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name):
 
 def liver_segmenter(params):
     try:
-        curr, output, cpu, verbose, multiple_flag, name = params
+        curr, output, cpu, verbose, multiple_flag, name, extension = params
 
         # load model
         model = load_model(name, compile=False)
@@ -123,9 +123,9 @@ def liver_segmenter(params):
         img = nib.Nifti1Image(pred, affine=resampled_volume.affine)
         resampled_lab = resample_from_to(img, nib_volume, order=0)
         if multiple_flag:
-            nib.save(resampled_lab, output + "/" + curr.split("/")[-1].split(".")[0] + "-livermask.nii")
+            nib.save(resampled_lab, output + "/" + curr.split("/")[-1].split(".")[0] + "-livermask" + extension)
         else:
-            nib.save(resampled_lab, output + "-livermask.nii")
+            nib.save(resampled_lab, output + "-livermask" + extension)
 
         return pred
     except KeyboardInterrupt:
