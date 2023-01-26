@@ -102,21 +102,24 @@ def liver_segmenter(params):
 
         # 2) keep only largest connected component
         labels = label(pred)
-        regions = regionprops(labels)
-        area_sizes = []
-        for region in regions:
-            area_sizes.append([region.label, region.area])
-        area_sizes = np.array(area_sizes)
-        tmp = np.zeros_like(pred)
-        tmp[labels == area_sizes[np.argmax(area_sizes[:, 1]), 0]] = 1
-        pred = tmp.copy()
-        del tmp, labels, regions, area_sizes
+        nb_uniques = len(np.unique(labels))  # note: includes background 0
+        if nb_uniques > 2:  # if only one, no filtering needed
+            regions = regionprops(labels)
+            area_sizes = []
+            for region in regions:
+                area_sizes.append([region.label, region.area])
+            area_sizes = np.array(area_sizes)
+            tmp = np.zeros_like(pred)
+            tmp[labels == area_sizes[np.argmax(area_sizes[:, 1]), 0]] = 1
+            pred = tmp.copy()
+            del tmp, labels, regions, area_sizes
+        
+        if nb_uniques > 1:  # if no segmentation, no post-processing needed
+            # 3) dilate
+            pred = binary_dilation(pred.astype(bool), ball(3))
 
-        # 3) dilate
-        pred = binary_dilation(pred.astype(bool), ball(3))
-
-        # 4) remove small holes
-        pred = remove_small_holes(pred.astype(bool), area_threshold=0.001 * np.prod(pred.shape))
+            # 4) remove small holes
+            pred = remove_small_holes(pred.astype(bool), area_threshold=0.001 * np.prod(pred.shape))
 
         log.info("saving...")
         pred = pred.astype(np.uint8)
