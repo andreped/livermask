@@ -2,9 +2,11 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - "*"
   pull_request:
-    branches: [ master ]
+    branches:
+      - "*"
 
 jobs:
   build:
@@ -72,9 +74,13 @@ jobs:
           gdown https://drive.google.com/uc?id=1shjSrFjS4PHE5sTku30PZTLPZpGu24o3
           gdown https://drive.google.com/uc?id=1bNmls5o0Rxw5HvBF1IYnEzmpysYJaywN
 
-      - name: Test inference
+      - name: Test inference .nii
         run: |
           livermask --input samples --output samples --verbose --vessels
+
+      - name: Test inference .nii.gz
+        run: |
+          livermask --input samples --output samples --verbose --vessels --extension .nii.gz
 
   conda:
     needs: build
