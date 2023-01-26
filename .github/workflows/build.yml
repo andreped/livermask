@@ -72,7 +72,7 @@ jobs:
           mkdir samples
           cd samples
           gdown https://drive.google.com/uc?id=1shjSrFjS4PHE5sTku30PZTLPZpGu24o3
-          gdown https://drive.google.com/uc?id=1oID3MyN3hjVWF_cfKJg1oL37p7GrvVUh
+          gdown https://drive.google.com/uc?id=1bNmls5o0Rxw5HvBF1IYnEzmpysYJaywN
 
       - name: Test inference .nii
         run: |
