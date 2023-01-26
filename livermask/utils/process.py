@@ -132,7 +132,7 @@ def liver_segmenter(params):
         raise "Caught KeyboardInterrupt, terminating worker"
 
 
-def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name_vessel):
+def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name_vessel, extension):
     # check if cupy is available, if not, set cpu=True
     try:
         import cupy
@@ -226,6 +226,6 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     img = nib.Nifti1Image(pred, affine=resampled_volume.affine)
     resampled_lab = resample_from_to(img, nib_volume, order=0)
     if multiple_flag:
-        nib.save(resampled_lab, output + "/" + curr.split("/")[-1].split(".")[0] + "-vessels.nii")
+        nib.save(resampled_lab, output + "/" + curr.split("/")[-1].split(".")[0] + "-vessels" + extension)
     else:
-        nib.save(resampled_lab, output + "-vessels.nii")
+        nib.save(resampled_lab, output + "-vessels" + extension)
