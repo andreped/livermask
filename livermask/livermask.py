@@ -29,7 +29,7 @@ os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'  # due to this: https://github.
 warnings.filterwarnings('ignore', '.*output shape of zoom.*')  # mute some warnings
 
 
-def func(path, output, cpu, verbose, vessels):
+def func(path, output, cpu, verbose, vessels, extension):
     # enable verbose or not
     log = verboseHandler(verbose)
 
@@ -54,15 +54,15 @@ def func(path, output, cpu, verbose, vessels):
 
     for curr in tqdm(paths, "CT:"):
         # check if current file is a nifti file, if not, skip
-        if not curr.endswith(".nii"):
+        if not curr.endswith(".nii") or not curr.endswith(".nii.gz"):
             continue
 
         # perform liver parenchyma segmentation, launch it in separate process to properly clear memory
-        pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name)
+        pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name, extension)
 
         if vessels:
             # perform liver vessel segmentation
-            vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel)
+            vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel, extension)
 
 
 def main():
@@ -77,6 +77,8 @@ def main():
                     help="enable verbose.")
     parser.add_argument('--vessels', action='store_true',
                     help="segment vessels.")
+    parser.add_argument('--extension', metavar='--e', type=str, default=".nii",
+                    help="define the output extension. (default: .nii)")
     ret = parser.parse_args(sys.argv[1:]); print(ret)
 
     if ret.cpu:
@@ -105,10 +107,12 @@ def main():
     ret.input = ret.input.replace("\\", "/")
     ret.output = ret.output.replace("\\", "/")
 
-    if not os.path.isdir(ret.input) and not ret.input.endswith(".nii"):
-        raise ValueError("Input path provided is not in the supported '.nii' format or a directory.")
-    if ret.output.endswith(".nii") or "." in ret.output.split("/")[-1]:
+    if not os.path.isdir(ret.input) and not ret.input.endswith(".nii") and not ret.input.endswith(".nii.gz"):
+        raise ValueError("Input path provided is not in the supported '.nii' or '.nii.gz' formats or a directory.")
+    if ret.output.endswith(".nii") or ret.output.endswith(".nii.gz") or "." in ret.output.split("/")[-1]:
         raise ValueError("Output path provided is not a directory or a name (remove *.nii format from name).")
+    if ret.extension not in [".nii", ".nii.gz"]:
+        raise ValueError("Extension not supported. Expected: .nii or .nii.gz")
 
     func(*vars(ret).values())
 
