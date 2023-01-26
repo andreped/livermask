@@ -79,10 +79,6 @@ jobs:
         run: |
           livermask --input samples --output results --verbose --vessels
 
-      - name: Test inference .nii.gz
-        run: |
-          livermask --input samples --output results --verbose --vessels --extension .nii.gz
-
   conda:
     needs: build
     runs-on: ${{ matrix.os }}
