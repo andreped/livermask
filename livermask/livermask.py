@@ -62,7 +62,7 @@ def func(path, output, cpu, verbose, vessels, extension):
                 # perform liver vessel segmentation
                 vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel, extension)
         else:
-            pass
+            log.info("Unsuported file: " + curr)
 
 
 def main():
