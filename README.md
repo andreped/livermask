@@ -33,11 +33,6 @@ also works for conda environments.
 pip install cupy-cuda110
 ```
 
-(DEBUG) If you experience issues with numpy, after installing CuPy, try reinstalling CuPy with this extension:
-```
-pip install 'cupy-cuda110>=7.7.0,<8.0.0'
-```
-
 Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 18.04.
 
 ## Usage:
@@ -76,6 +71,11 @@ You might have issues downloading the model when using VPN. If any issues are ob
 If the program struggles to install, attempt to install using:
 ```
 pip install --force-reinstall --no-deps git+https://github.com/andreped/livermask.git
+```
+
+If you experience issues with numpy after installing CuPy, try reinstalling CuPy with this extension:
+```
+pip install 'cupy-cuda110>=7.7.0,<8.0.0'
 ```
 
 ## Acknowledgements
