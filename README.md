@@ -78,6 +78,10 @@ If you experience issues with numpy after installing CuPy, try reinstalling CuPy
 pip install 'cupy-cuda110>=7.7.0,<8.0.0'
 ```
 
+## Applications of livermask
+* Pérez de Frutos et al., Learning deep abdominal CT registration through adaptive loss weighting and synthetic data generation, PLOS ONE, 
+https://doi.org/10.1371/journal.pone.0282110
+
 ## Acknowledgements
 If you found this tool helpful in your research, please, consider citing it:
 <pre>
