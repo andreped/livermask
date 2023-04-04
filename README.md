@@ -33,7 +33,7 @@ also works for conda environments.
 pip install cupy-cuda110
 ```
 
-Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 18.04.
+Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 20.04.
 
 ## Usage
 
