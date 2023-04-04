@@ -50,13 +50,20 @@ livermask --input path-to-input --output path-to-output
 | `--vessels` | to segment vessels |
 | `--extension` | which extension to save output in (default: `.nii`) |
 
-### Using code directly:
+<details open>
+<summary>
+
+### Using code directly</summary>
 If you wish to use the code directly (not as a CLI and without installing), you can run this command:
 ```
 python -m livermask.livermask --input path-to-input --output path-to-output
 ```
+</details>
 
-## DICOM/NIfTI format
+<details>
+<summary>
+
+### DICOM/NIfTI format</summary>
 Pipeline assumes input is in the NIfTI format, and output a binary volume in the same format (.nii or .nii.gz).
 DICOM can be converted to NIfTI using the CLI [dcm2niix](https://github.com/rordenlab/dcm2niix), as such:
 ```
@@ -65,7 +72,13 @@ dcm2niix -s y -m y -d 1 "path_to_CT_folder" "output_name"
 
 Note that "-d 1" assumed that "path_to_CT_folder" is the folder just before the set of DICOM scans you want to import and convert. This can be removed if you want to convert multiple ones at the same time. It is possible to set "." for "output_name", which in theory should output a file with the same name as the DICOM folder, but that doesn't seem to happen...
 
-## Troubleshooting
+</details>
+
+
+<details>
+<summary>
+
+### Troubleshooting</summary>
 You might have issues downloading the model when using VPN. If any issues are observed, try to disable VPN and try again.
 
 If the program struggles to install, attempt to install using:
@@ -77,6 +90,7 @@ If you experience issues with numpy after installing CuPy, try reinstalling CuPy
 ```
 pip install 'cupy-cuda110>=7.7.0,<8.0.0'
 ```
+</details>
 
 ## Applications of livermask
 * Pérez de Frutos et al., Learning deep abdominal CT registration through adaptive loss weighting and synthetic data generation, PLOS ONE, 
