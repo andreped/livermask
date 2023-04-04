@@ -67,17 +67,17 @@ def func(path, output, cpu, verbose, vessels, extension):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input', metavar='--i', type=str, nargs='?',
+    parser.add_argument('-i', '--input', type=str, nargs='?',
                     help="set path of which image(s) to use.")
-    parser.add_argument('--output', metavar='--o', type=str, nargs='?',
+    parser.add_argument('-o', '--output', type=str, nargs='?',
                     help="set path to store the output.")
-    parser.add_argument('--cpu', action='store_true',
+    parser.add_argument('-c', '--cpu', action='store_true',
                     help="force using the CPU even if a GPU is available.")
-    parser.add_argument('--verbose', action='store_true',
+    parser.add_argument('-v', '--verbose', action='store_true',
                     help="enable verbose.")
-    parser.add_argument('--vessels', action='store_true',
+    parser.add_argument('-vs', '--vessels', action='store_true',
                     help="segment vessels.")
-    parser.add_argument('--extension', metavar='--e', type=str, default=".nii",
+    parser.add_argument('-e', '--extension', type=str, default=".nii",
                     help="define the output extension. (default: .nii)")
     ret = parser.parse_args(sys.argv[1:]); print(ret)
 
