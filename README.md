@@ -35,7 +35,7 @@ pip install cupy-cuda110
 
 Program has been tested using Python 3.7 on Windows, macOS, and Ubuntu Linux 18.04.
 
-## Usage:
+## Usage
 
 ```
 livermask --input path-to-input --output path-to-output
