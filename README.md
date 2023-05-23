@@ -5,7 +5,7 @@ sdk: gradio
 sdk_version: 3.0.15
 emoji: 🚀
 pinned: false
-license: MIT
+license: mit
 app_file: demo/app.py
 ---
 <div align="center">
