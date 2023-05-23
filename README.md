@@ -1,3 +1,13 @@
+---
+title: 'livermask: Automatic Liver Parenchyma and vessel segmentation in CT'
+colorFrom: indigo
+sdk: gradio
+sdk_version: 3.0.15
+emoji: 🚀
+pinned: false
+license: MIT
+app_file: demo/app.py
+---
 <div align="center">
 <h1 align="center">livermask</h1>
 <h3 align="center">Automatic liver parenchyma and vessel segmentation in CT using deep learning</h3>
