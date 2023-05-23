@@ -13,5 +13,4 @@ gradio_cached_examples/
 flagged/
 files/
 *.csv
-*.txt
 *.obj
