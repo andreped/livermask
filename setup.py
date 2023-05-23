@@ -10,7 +10,7 @@ with open('requirements.txt', 'r', encoding='utf-16', errors='ignore') as ff:
 
 setup(
     name='livermask',
-    version='1.4.2',
+    version='1.5.0',
     author="André Pedersen and Javier Pérez de Frutos",
     author_email="andrped94@gmail.com",
     license='MIT',
