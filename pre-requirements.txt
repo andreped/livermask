@@ -1,3 +1,2 @@
 gradio==3.32.0
 livermask @ git+https://github.com/andreped/livermask.git
-typing_extensions==4.6.0
