@@ -2,7 +2,7 @@
 title: 'livermask: Automatic Liver Parenchyma and vessel segmentation in CT'
 colorFrom: indigo
 sdk: gradio
-sdk_version: 3.0.15
+sdk_version: 3.32.0
 emoji: 🚀
 pinned: false
 license: mit
