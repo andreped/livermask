@@ -10,7 +10,7 @@ with open('requirements.txt', 'r', encoding='utf-16', errors='ignore') as ff:
 
 setup(
     name='livermask',
-    version='1.4.1',
+    version='1.4.2',
     author="André Pedersen and Javier Pérez de Frutos",
     author_email="andrped94@gmail.com",
     license='MIT',
@@ -25,7 +25,7 @@ setup(
             'livermask.utils',
             'livermask.configs',
         ]
-    ),
+    ), 
     entry_points={
         'console_scripts': [
             'livermask = livermask.livermask:main',

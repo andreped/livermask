@@ -42,7 +42,7 @@ if __name__ == "__main__":
         fn=load_mesh,
         inputs=gr.UploadButton(label="Click to Upload a File", file_type=[".nii", ".nii.nz"], file_count="single"),
         outputs=gr.Model3D(clear_color=[0.0, 0.0, 0.0, 0.0], label="3D Model"),
-        title="livermask demo",
-        description="Automatic Liver Parenchyma and vessel segmentation in CT",
+        title="livermask: Automatic Liver Parenchyma segmentation in CT",
+        description="Using pretrained deep learning model trained on the LiTS17 dataset",
     )
     demo.launch()
