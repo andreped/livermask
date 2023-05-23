@@ -8,3 +8,9 @@ livermask.egg-info/
 *.nii
 *__pycache__/
 .idea/
+*.glb
+gradio_cached_examples/
+flagged/
+files/
+*.csv
+*.txt
