@@ -3,8 +3,6 @@ build/
 dist/
 livermask.egg-info/
 *.DS_Store
-*.h5
-*.npz
 *.nii
 *__pycache__/
 .idea/
