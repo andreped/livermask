@@ -29,6 +29,23 @@ def run_analysis(path, output, cpu, verbose, vessels, extension, name=None, name
     path = path.replace("\\", "/")
     output = output.replace("\\", "/")
 
+    if cpu:
+        os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+    if not tf.test.is_gpu_available():
+        tf.config.set_visible_devices([], 'GPU')
+        visible_devices = tf.config.get_visible_devices()
+    else:
+        gpus = tf.config.experimental.list_physical_devices('GPU')
+        try:
+            # Currently, memory growth needs to be the same across GPUs
+            for gpu in gpus:
+                tf.config.experimental.set_memory_growth(gpu, enable=True)
+            logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+            print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+        except RuntimeError as e:
+            # Memory growth must be set before GPUs have been initialized
+            print(e)
+
     # enable verbose or not
     log = verboseHandler(verbose)
     

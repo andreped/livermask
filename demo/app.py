@@ -29,7 +29,7 @@ def nifti_to_glb(path):
 def run_model(input_path):
     from livermask.utils.run import run_analysis
     
-    run_analysis(cpu=False, extension='.nii', path=input_path, output='prediction', verbose=True, vessels=False, name="./model.h5")
+    run_analysis(cpu=True, extension='.nii', path=input_path, output='prediction', verbose=True, vessels=False, name="./model.h5")
     
     #cmd_docker = ["python3", "-m", "livermask.livermask", "--input", input_path, "--output", "prediction", "--verbose"]
     #sp.check_call(cmd_docker, shell=True)  # @FIXME: shell=True here is not optimal -> starts a shell after calling script

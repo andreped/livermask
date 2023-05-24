@@ -25,26 +25,6 @@ def main():
     ret = parser.parse_args(sys.argv[1:])
     print(ret)
 
-    # only now do we call tensorflow, if necessary (to avoid redundant imports for livermask -h call)
-    import tensorflow as tf
-
-    if ret.cpu:
-        os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-    if not tf.test.is_gpu_available():
-        tf.config.set_visible_devices([], 'GPU')
-        visible_devices = tf.config.get_visible_devices()
-    else:
-        gpus = tf.config.experimental.list_physical_devices('GPU')
-        try:
-            # Currently, memory growth needs to be the same across GPUs
-            for gpu in gpus:
-                tf.config.experimental.set_memory_growth(gpu, enable=True)
-            logical_gpus = tf.config.experimental.list_logical_devices('GPU')
-            print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
-        except RuntimeError as e:
-            # Memory growth must be set before GPUs have been initialized
-            print(e)
-
     if ret.input is None:
         raise ValueError("Please, provide an input.")
     if ret.output is None:
