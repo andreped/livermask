@@ -24,7 +24,7 @@ import logging as log
 from .utils import get_model, get_vessel_model
 
 
-def run_analysis(path, output, cpu, verbose, vessels, extension, name=None, name_vessel=None):
+def run_analysis(path, output, cpu, verbose, vessels, extension, name=None, name_vessel=None, mp_enabled=True):
     # fix paths (necessary if called as a package and not CLI)
     path = path.replace("\\", "/")
     output = output.replace("\\", "/")
@@ -74,7 +74,7 @@ def run_analysis(path, output, cpu, verbose, vessels, extension, name=None, name
         # check if current file is a nifti file, if not, skip
         if curr.endswith(".nii") or curr.endswith(".nii.gz"):
             # perform liver parenchyma segmentation, launch it in separate process to properly clear memory
-            pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name, extension)
+            pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name, extension, mp_enabled)
 
             if vessels:
                 # perform liver vessel segmentation
