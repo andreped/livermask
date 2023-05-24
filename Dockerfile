@@ -24,8 +24,8 @@ RUN apt-get update -y
 RUN apt install git --fix-missing -y
 
 # install dependencies
-COPY ./requirements.txt /code/requirements.txt
-RUN python3.7 -m pip install --no-cache-dir --upgrade -r /code/requirements.txt
+COPY ./demo/requirements.txt /code/demo/requirements.txt
+RUN python3.7 -m pip install --no-cache-dir --upgrade -r /code/demo/requirements.txt
 
 # resolve issue with tf==2.4 and gradio dependency collision issue
 RUN python3.7 -m pip install --force-reinstall typing_extensions==4.0.0

@@ -14,3 +14,6 @@ flagged/
 files/
 *.csv
 *.obj
+livermask/
+figures/
+venv*
