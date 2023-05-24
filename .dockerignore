@@ -1,0 +1,16 @@
+venv/
+build/
+dist/
+livermask.egg-info/
+*.DS_Store
+*.h5
+*.npz
+*.nii
+*__pycache__/
+.idea/
+*.glb
+gradio_cached_examples/
+flagged/
+files/
+*.csv
+*.obj
