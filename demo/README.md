@@ -10,6 +10,8 @@ license: mit
 app_file: demo/app.py
 ---
 
+![Screenshot 2023-05-24 at 19 14 15](https://github.com/andreped/livermask/assets/29090665/6083a28a-9250-4f86-a9b2-8d4e9823c836)
+
 # livermask Hugging Face demo - through docker SDK
 
 Deploying simple models in a gradio-based web interface in Hugging Face spaces is easy.
