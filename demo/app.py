@@ -27,7 +27,17 @@ def nifti_to_glb(path):
 
 
 def run_model(input_path):
-    sp.check_call(["livermask", "--input", input_path, "--output", "prediction", "--verbose"])
+    from livermask.utils.run import run_analysis
+    
+    run_analysis(cpu=False, extension='.nii', path=input_path, output='prediction', verbose=True, vessels=False)
+    
+    #cmd_docker = ["python3", "-m", "livermask.livermask", "--input", input_path, "--output", "prediction", "--verbose"]
+    #sp.check_call(cmd_docker, shell=True)  # @FIXME: shell=True here is not optimal -> starts a shell after calling script
+    
+    #p = sp.Popen(cmd_docker, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #stdout, stderr = p.communicate()
+    #print("stdout:", stdout)
+    #print("stderr:", stderr)
 
 
 def load_mesh(mesh_file_name):
@@ -38,6 +48,7 @@ def load_mesh(mesh_file_name):
 
 
 if __name__ == "__main__":
+    print("Launching demo...")
     demo = gr.Interface(
         fn=load_mesh,
         inputs=gr.UploadButton(label="Click to Upload a File", file_types=[".nii", ".nii.nz"], file_count="single"),
@@ -45,4 +56,4 @@ if __name__ == "__main__":
         title="livermask: Automatic Liver Parenchyma segmentation in CT",
         description="Using pretrained deep learning model trained on the LiTS17 dataset",
     )
-    demo.launch()
+    demo.launch(server_name="0.0.0.0", server_port=7860)

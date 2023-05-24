@@ -1,0 +1,2 @@
+livermask @ git+https://github.com/andreped/livermask.git
+gradio==3.32.0
