@@ -30,14 +30,6 @@ def run_model(input_path):
     from livermask.utils.run import run_analysis
     
     run_analysis(cpu=True, extension='.nii', path=input_path, output='prediction', verbose=True, vessels=False, name="/home/user/app/model.h5", mp_enabled=False)
-    
-    #cmd_docker = ["python3", "-m", "livermask.livermask", "--input", input_path, "--output", "prediction", "--verbose"]
-    #sp.check_call(cmd_docker, shell=True)  # @FIXME: shell=True here is not optimal -> starts a shell after calling script
-    
-    #p = sp.Popen(cmd_docker, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    #stdout, stderr = p.communicate()
-    #print("stdout:", stdout)
-    #print("stderr:", stderr)
 
 
 def load_mesh(mesh_file_name):
