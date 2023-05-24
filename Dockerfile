@@ -32,9 +32,7 @@ RUN python3.7 -m pip install --force-reinstall typing_extensions==4.0.0
 # Install wget
 RUN apt install wget -y
 
-# Download pretrained parenchyma model
-RUN wget "https://github.com/andreped/livermask/releases/download/trained-models-v1/model.h5"
-COPY --chown=user ./model.h5 /code/model.h5
+RUN ls -la
 
 # Set up a new user named "user" with user ID 1000
 RUN useradd -m -u 1000 user
@@ -51,5 +49,8 @@ WORKDIR $HOME/app
 
 # Copy the current directory contents into the container at $HOME/app setting the owner to the user
 COPY --chown=user . $HOME/app
+
+# Download pretrained parenchyma model
+RUN wget "https://github.com/andreped/livermask/releases/download/trained-models-v1/model.h5"
 
 CMD ["python3.7", "demo/app.py"]
