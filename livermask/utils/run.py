@@ -70,6 +70,7 @@ def run_analysis(path, output, cpu, verbose, vessels, extension, name=None, name
     if multiple_flag:
         os.makedirs(output + "/", exist_ok=True)
 
+    log.info("Starting inference...")
     for curr in tqdm(paths, "CT:"):
         # check if current file is a nifti file, if not, skip
         if curr.endswith(".nii") or curr.endswith(".nii.gz"):

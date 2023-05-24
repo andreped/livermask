@@ -34,7 +34,7 @@ RUN apt install wget -y
 
 # Download pretrained parenchyma model
 RUN wget "https://github.com/andreped/livermask/releases/download/trained-models-v1/model.h5"
-#COPY --chown=user ./model.h5 /code/model.h5
+COPY --chown=user ./model.h5 /code/model.h5
 
 # Set up a new user named "user" with user ID 1000
 RUN useradd -m -u 1000 user
