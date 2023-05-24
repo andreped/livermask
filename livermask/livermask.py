@@ -1,68 +1,11 @@
-import numpy as np
-import os
 import sys
-from tqdm import tqdm 
-import nibabel as nib
-from nibabel.processing import resample_to_output, resample_from_to
-from scipy.ndimage import zoom
-from tensorflow.python.keras.models import load_model
-from skimage.morphology import remove_small_holes, binary_dilation, binary_erosion, ball
-from skimage.measure import label, regionprops
+import os
 import warnings
 import argparse
-import pkg_resources
-import tensorflow as tf
-import logging as log
-import chainer
-import math
-from .utils.unet3d import UNet3D
-import yaml
-from tensorflow.keras import backend as K
-from numba import cuda
-from .utils.process import liver_segmenter_wrapper, vessel_segmenter, intensity_normalization
-from .utils.utils import verboseHandler
-import logging as log
-from .utils.utils import get_model, get_vessel_model
 
 
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'  # due to this: https://github.com/tensorflow/tensorflow/issues/35029
 warnings.filterwarnings('ignore', '.*output shape of zoom.*')  # mute some warnings
-
-
-def func(path, output, cpu, verbose, vessels, extension):
-    # enable verbose or not
-    log = verboseHandler(verbose)
-
-    cwd = "/".join(os.path.realpath(__file__).replace("\\", "/").split("/")[:-1]) + "/"
-    name = cwd + "model.h5"
-    name_vessel = cwd + "model-hepatic_vessel.npz"
-
-    # get models
-    get_model(name)
-
-    if vessels:
-        get_vessel_model(name_vessel)
-
-    if not os.path.isdir(path):
-        paths = [path]
-    else:
-        paths = [path + "/" + p for p in os.listdir(path)]
-
-    multiple_flag = len(paths) > 1
-    if multiple_flag:
-        os.makedirs(output + "/", exist_ok=True)
-
-    for curr in tqdm(paths, "CT:"):
-        # check if current file is a nifti file, if not, skip
-        if curr.endswith(".nii") or curr.endswith(".nii.gz"):
-            # perform liver parenchyma segmentation, launch it in separate process to properly clear memory
-            pred = liver_segmenter_wrapper(curr, output, cpu, verbose, multiple_flag, name, extension)
-
-            if vessels:
-                # perform liver vessel segmentation
-                vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel, extension)
-        else:
-            log.info("Unsuported file: " + curr)
 
 
 def main():
@@ -79,7 +22,11 @@ def main():
                     help="segment vessels.")
     parser.add_argument('-e', '--extension', type=str, default=".nii",
                     help="define the output extension. (default: .nii)")
-    ret = parser.parse_args(sys.argv[1:]); print(ret)
+    ret = parser.parse_args(sys.argv[1:])
+    print(ret)
+
+    # only now do we call tensorflow, if necessary (to avoid redundant imports for livermask -h call)
+    import tensorflow as tf
 
     if ret.cpu:
         os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -114,7 +61,9 @@ def main():
     if ret.extension not in [".nii", ".nii.gz"]:
         raise ValueError("Extension not supported. Expected: .nii or .nii.gz")
 
-    func(*vars(ret).values())
+    # finally, import run_analysis method with relevant imports and run analysis
+    from .utils.run import run_analysis
+    run_analysis(*vars(ret).values())
 
 
 if __name__ == "__main__":
