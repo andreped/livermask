@@ -56,4 +56,6 @@ if __name__ == "__main__":
         title="livermask: Automatic Liver Parenchyma segmentation in CT",
         description="Using pretrained deep learning model trained on the LiTS17 dataset",
     )
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    # sharing app publicly -> share=True: https://gradio.app/sharing-your-app/
+    # inference times > 60 seconds -> need queue(): https://github.com/tloen/alpaca-lora/issues/60#issuecomment-1510006062
+    demo.queue().launch(server_name="0.0.0.0", server_port=7860, share=True)
