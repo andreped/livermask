@@ -1,4 +1,3 @@
-<!---
 ---
 title: 'livermask: Automatic Liver Parenchyma and vessel segmentation in CT'
 colorFrom: indigo
@@ -10,7 +9,6 @@ pinned: false
 license: mit
 app_file: demo/app.py
 ---
--->
 
 
 <div align="center">
