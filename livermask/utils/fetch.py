@@ -12,11 +12,7 @@ def download(url, destination_file):
         mtime = os.path.getmtime(destination_file)
         headers["if-modified-since"] = formatdate(mtime, usegmt=True)
 
-    # relevant for docker
-    session = requests.Session()
-    session.trust_env = False
-
-    response = session.get(url, headers=headers, stream=True)
+    response = requests.get(url, headers=headers, stream=True)
     response.raise_for_status()
 
     if response.status_code == requests.codes.not_modified:

@@ -24,22 +24,24 @@ import logging as log
 from .utils import get_model, get_vessel_model
 
 
-def run_analysis(path, output, cpu, verbose, vessels, extension):
+def run_analysis(path, output, cpu, verbose, vessels, extension, name=None, name_vessel=None):
     # fix paths (necessary if called as a package and not CLI)
     path = path.replace("\\", "/")
     output = output.replace("\\", "/")
 
     # enable verbose or not
     log = verboseHandler(verbose)
-
+    
+    # if model names are not provided, download them (necessary for docker,
+    # where we cannot perform HTTP requests from inside container)
     cwd = "/".join(os.path.realpath(__file__).replace("\\", "/").split("/")[:-1]) + "/"
-    name = cwd + "model.h5"
-    name_vessel = cwd + "model-hepatic_vessel.npz"
-
-    # get models
-    get_model(name)
-
-    if vessels:
+    log.info("Model names: " + str(name) + ", " + str(name_vessel))
+    if name is None:
+        name = cwd + "model.h5"
+        get_model(name)
+    
+    if vessels and name_vessel is None:
+        name_vessel = cwd + "model-hepatic_vessel.npz"
         get_vessel_model(name_vessel)
 
     if not os.path.isdir(path):
@@ -61,4 +63,4 @@ def run_analysis(path, output, cpu, verbose, vessels, extension):
                 # perform liver vessel segmentation
                 vessel_segmenter(curr, output, cpu, verbose, multiple_flag, pred, name_vessel, extension)
         else:
-            log.info("Unsuported file: " + curr)
+            log.info("Unsupported file: " + curr)

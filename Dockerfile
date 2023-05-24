@@ -22,16 +22,16 @@ WORKDIR /code
 RUN apt-get update -y
 RUN apt install git --fix-missing -y
 
+# Download pretrained parenchyma model
+RUN wget "https://github.com/andreped/livermask/releases/download/trained-models-v1/model.h5"
+COPY ./model.h5 /code/model.h5
+
 # install dependencies
 COPY ./demo/requirements.txt /code/demo/requirements.txt
 RUN python3.7 -m pip install --no-cache-dir --upgrade -r /code/demo/requirements.txt
 
 # resolve issue with tf==2.4 and gradio dependency collision issue
 RUN python3.7 -m pip install --force-reinstall typing_extensions==4.0.0
-
-# allow container to access outside world
-RUN apt-get update && apt install iptables -y
-RUN sysctl net.ipv4.conf.all.forwarding=1
 
 # Set up a new user named "user" with user ID 1000
 RUN useradd -m -u 1000 user
