@@ -1,6 +1,5 @@
 import gdown
 import logging as log
-import chainer
 from .unet3d import UNet3D
 from .fetch import download
 import os
@@ -29,6 +28,7 @@ def get_vessel_model(output):
 
 
 def load_vessel_model(path, cpu):
+    import chainer
     unet = UNet3D(num_of_label=2)
     chainer.serializers.load_npz(path, unet)
     if not cpu:
