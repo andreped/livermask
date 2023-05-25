@@ -10,7 +10,7 @@ license: mit
 app_file: demo/app.py
 ---
 
-![Screenshot 2023-05-24 at 19 14 15](https://github.com/andreped/livermask/assets/29090665/6083a28a-9250-4f86-a9b2-8d4e9823c836)
+<img width="1758" alt="Screenshot 2023-05-25 at 20 00 15" src="https://github.com/andreped/livermask/assets/29090665/039577fe-ee8b-4500-8c3f-8d7a5a2dd3d3">
 
 # livermask Hugging Face demo - through docker SDK
 
@@ -49,6 +49,6 @@ docker run -it -p 7860:7860 livermask
 
 Then open `http://127.0.0.1:7860` in your favourite internet browser to view the demo.
 
-Natural future TODOs include:
-- [ ] Add gallery widget to enable scrolling through 2D slices
-- [ ] Render segmentation for individual 2D slices as overlays
+TODOs:
+- [X] Add gallery widget to enable scrolling through 2D slices
+- [X] Render segmentation for individual 2D slices as overlays
