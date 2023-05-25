@@ -13,14 +13,11 @@ import argparse
 import pkg_resources
 import tensorflow as tf
 import logging as log
-import chainer
 import math
-from .unet3d import UNet3D
 from .yaml_utils import Config
 import yaml
 from tensorflow.keras import backend as K
 from numba import cuda
-from .utils import load_vessel_model
 import multiprocessing as mp
 
 
@@ -139,6 +136,11 @@ def liver_segmenter(params):
 
 
 def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name_vessel, extension):
+    # only import chainer stuff inside here, to avoid unnecessary imports
+    import chainer
+    from .unet3d import UNet3D
+    from .utils import load_vessel_model
+
     # check if cupy is available, if not, set cpu=True
     try:
         import cupy
@@ -157,7 +159,6 @@ def vessel_segmenter(curr, output, cpu, verbose, multiple_flag, liver_mask, name
     nib_volume = nib.load(curr)
     new_spacing = [1., 1., 1.]
     resampled_volume = resample_to_output(nib_volume, new_spacing, order=1)
-    # resampled_volume = nib_volume
     org = resampled_volume.get_data().astype('float32')
 
     # HU clipping

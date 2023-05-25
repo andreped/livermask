@@ -22,6 +22,8 @@ WORKDIR /code
 RUN apt-get update -y
 RUN apt install git --fix-missing -y
 
+RUN ls -la
+
 # install dependencies
 COPY ./demo/requirements.txt /code/demo/requirements.txt
 RUN python3.7 -m pip install --no-cache-dir --upgrade -r /code/demo/requirements.txt
@@ -31,8 +33,6 @@ RUN python3.7 -m pip install --force-reinstall typing_extensions==4.0.0
 
 # Install wget
 RUN apt install wget -y
-
-RUN ls -la
 
 # Set up a new user named "user" with user ID 1000
 RUN useradd -m -u 1000 user
