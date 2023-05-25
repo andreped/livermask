@@ -26,6 +26,10 @@ app_file: demo/app.py
 <img src="figures/Segmentation_3DSlicer.PNG" width="70%">
 </div>
 
+## Demo <a target="_blank" href="https://huggingface.co/spaces/awsaf49/gcvit-tf"><img src="https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-yellow.svg"></a>
+
+An online version of the tool has been made openly available at Hugging Face spaces, to enable researchers to easily test the software on their own data without downloading it. To access it, click on the badge above.
+
 ## Install
 
 ```
