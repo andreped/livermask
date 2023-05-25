@@ -40,6 +40,15 @@ of the predicted liver parenchyma 3D volume when finished processing.
 Analysis process can be monitored from the `Logs` tab next to the `Running` button
 in the Hugging Face `livermask` space.
 
+It is also possible to build the app as a docker image and deploy it. To do so follow these steps:
+
+```
+docker build -t livermask ..
+docker run -it -p 7860:7860 livermask
+```
+
+Then open `http://127.0.0.1:7860` in your favourite internet browser to view the demo.
+
 Natural future TODOs include:
 - [ ] Add gallery widget to enable scrolling through 2D slices
 - [ ] Render segmentation for individual 2D slices as overlays
