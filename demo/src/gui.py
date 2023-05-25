@@ -33,7 +33,7 @@ class WebUI:
         path = mesh_file_name.name
         run_model(path, model_name)
         nifti_to_glb("prediction-livermask.nii")
-        self.image = load_ct_to_numpy(path)
+        self.images = load_ct_to_numpy(path)
         self.pred_images = load_pred_volume_to_numpy("./prediction-livermask.nii")
         self.slider = self.slider.update(value=2)
         return "./prediction.obj"
