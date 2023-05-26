@@ -4,8 +4,8 @@ from src.gui import WebUI
 def main():
     print("Launching demo...")
 
-    cwd = "/Users/andreped/workspace/livermask/"  # local testing -> macOS
-    # cwd = "/home/user/app/"  # production -> docker
+    # cwd = "/Users/andreped/workspace/livermask/"  # local testing -> macOS
+    cwd = "/home/user/app/"  # production -> docker
 
     model_name = "model.h5"  # assumed to lie in `cwd` directory
     class_name = "parenchyma"
