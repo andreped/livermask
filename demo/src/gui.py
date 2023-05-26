@@ -5,15 +5,17 @@ from .convert import nifti_to_glb
 
 
 class WebUI:
-    def __init__(self, model_name, class_name):
+    def __init__(self, model_name:str = None, class_name:str = None, cwd:str = None):
         # global states
         self.images = []
         self.pred_images = []
 
+        # @TODO: This should be dynamically set based on chosen volume size
         self.nb_slider_items = 100
 
         self.model_name = model_name
         self.class_name = class_name
+        self.cwd = cwd
 
         # define widgets not to be rendered immediantly, but later on
         self.slider = gr.Slider(1, self.nb_slider_items, value=1, step=1, label="Which 2D slice to show")
@@ -29,7 +31,7 @@ class WebUI:
     def upload_file(self, file):
         return file.name
     
-    def load_mesh(self, mesh_file_name, model_name="/home/user/app/model.h5"):
+    def load_mesh(self, mesh_file_name, model_name):
         path = mesh_file_name.name
         run_model(path, model_name)
         nifti_to_glb("prediction-livermask.nii")
@@ -48,11 +50,27 @@ class WebUI:
         with gr.Blocks() as demo:
 
             with gr.Row().style(equal_height=True):
-                file_output = gr.File(file_types=[".nii", ".nii.nz"], file_count="single").style(full_width=False, size="sm")
+                file_output = gr.File(
+                    file_types=[".nii", ".nii.nz"],
+                    file_count="single"
+                ).style(full_width=False, size="sm")
                 file_output.upload(self.upload_file, file_output, file_output)
 
                 run_btn = gr.Button("Run analysis").style(full_width=False, size="sm")
-                run_btn.click(fn=lambda x: self.load_mesh(x, model_name=self.model_name), inputs=file_output, outputs=self.volume_renderer)
+                run_btn.click(
+                    fn=lambda x: self.load_mesh(x, model_name=self.cwd + self.model_name),
+                    inputs=file_output,
+                    outputs=self.volume_renderer
+                )
+            
+            with gr.Row().style(equal_height=True):
+                gr.Examples(
+                    examples=[self.cwd + "test-volume.nii"],
+                    inputs=file_output,
+                    outputs=file_output,
+                    fn=self.upload_file,
+                    cache_examples=True,
+                )
             
             with gr.Row().style(equal_height=True):
                 with gr.Box():

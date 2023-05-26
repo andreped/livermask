@@ -4,11 +4,14 @@ from src.gui import WebUI
 def main():
     print("Launching demo...")
 
-    model_name = "/home/user/app/model.h5"  # "/Users/andreped/workspace/livermask/model.h5"
+    cwd = "/Users/andreped/workspace/livermask/"  # local testing -> macOS
+    # cwd = "/home/user/app/"  # production -> docker
+
+    model_name = "model.h5"  # assumed to lie in `cwd` directory
     class_name = "parenchyma"
 
     # initialize and run app
-    app = WebUI(model_name=model_name, class_name=class_name)
+    app = WebUI(model_name=model_name, class_name=class_name, cwd=cwd)
     app.run()
 
 

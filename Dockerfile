@@ -53,4 +53,7 @@ COPY --chown=user . $HOME/app
 # Download pretrained parenchyma model
 RUN wget "https://github.com/andreped/livermask/releases/download/trained-models-v1/model.h5"
 
+# Download test sample
+RUN python3.7 -m pip install gdown && gdown "https://drive.google.com/uc?id=1shjSrFjS4PHE5sTku30PZTLPZpGu24o3"
+
 CMD ["python3.7", "demo/app.py"]
