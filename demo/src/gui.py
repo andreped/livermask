@@ -22,7 +22,8 @@ class WebUI:
         self.volume_renderer = gr.Model3D(
             clear_color=[0.0, 0.0, 0.0, 0.0],
             label="3D Model",
-            visible=True
+            visible=True,
+            elem_id="model-3d",
         ).style(height=512)
 
     def combine_ct_and_seg(self, img, pred):
@@ -47,9 +48,18 @@ class WebUI:
         return out
 
     def run(self):
-        with gr.Blocks() as demo:
+        css="""
+        #model-3d {
+        height: 512px;
+        }
+        #model-2d {
+        height: 512px;
+        margin: auto;
+        }
+        """
+        with gr.Blocks(css=css) as demo:
 
-            with gr.Row().style(equal_height=True):
+            with gr.Row():
                 file_output = gr.File(
                     file_types=[".nii", ".nii.nz"],
                     file_count="single"
@@ -63,7 +73,7 @@ class WebUI:
                     outputs=self.volume_renderer
                 )
             
-            with gr.Row().style(equal_height=True):
+            with gr.Row():
                 gr.Examples(
                     examples=[self.cwd + "test-volume.nii"],
                     inputs=file_output,
@@ -72,12 +82,12 @@ class WebUI:
                     cache_examples=True,
                 )
             
-            with gr.Row().style(equal_height=True):
+            with gr.Row():
                 with gr.Box():
                     image_boxes = []
                     for i in range(self.nb_slider_items):
                         visibility = True if i == 1 else False
-                        t = gr.AnnotatedImage(visible=visibility)\
+                        t = gr.AnnotatedImage(visible=visibility, elem_id="model-2d")\
                             .style(color_map={self.class_name: "#ffae00"}, height=512, width=512)
                         image_boxes.append(t)
 
