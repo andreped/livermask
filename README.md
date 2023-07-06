@@ -32,6 +32,7 @@ An online version of the tool has been made openly available at Hugging Face spa
 
 ## Install
 
+A stable release is available on PyPI:
 ```
 pip install livermask
 ```
