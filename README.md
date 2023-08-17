@@ -114,7 +114,7 @@ pip install 'cupy-cuda110>=7.7.0,<8.0.0'
 * Yevdokimov et al., Recognition of Diffuse Hepatic Steatosis, 33rd Conference of Open Innovations Association (FRUCT), 2023, https://doi.org/10.23919/FRUCT58615.2023.10143062
 * Pérez de Frutos et al., Learning deep abdominal CT registration through adaptive loss weighting and synthetic data generation, PLOS ONE, 2023, 
 https://doi.org/10.1371/journal.pone.0282110
-* Survarachakan et al., Effects of Enhancement on Deep Learning Based Hepatic Vessel Segmentation, Electronics, https://doi.org/10.3390/electronics10101165
+* Survarachakan et al., Effects of Enhancement on Deep Learning Based Hepatic Vessel Segmentation, Electronics, 2021, https://doi.org/10.3390/electronics10101165
 
 ## Acknowledgements
 If you found this tool helpful in your research, please, consider citing it:
