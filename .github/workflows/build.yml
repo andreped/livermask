@@ -54,7 +54,7 @@ jobs:
           name: "Python wheel"
 
       - name: Install wheel
-        run: pip install --find-links=. livermask-*.
+        run: pip install --find-links=. livermask-*
         shell: bash
 
       - name: Test CLI
