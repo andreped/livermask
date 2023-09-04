@@ -111,6 +111,7 @@ pip install 'cupy-cuda110>=7.7.0,<8.0.0'
 </details>
 
 ## Applications of livermask
+* Lee et al., Robust End-to-End Focal Liver Lesion Detection Using Unregistered Multiphase Computed Tomography Images, IEEE Transactions on Emerging Topics in Computational Intelligence, 2023, https://doi.org/10.1109/TETCI.2021.3132382
 * Yevdokimov et al., Recognition of Diffuse Hepatic Steatosis, 33rd Conference of Open Innovations Association (FRUCT), 2023, https://doi.org/10.23919/FRUCT58615.2023.10143062
 * Pérez de Frutos et al., Learning deep abdominal CT registration through adaptive loss weighting and synthetic data generation, PLOS ONE, 2023, 
 https://doi.org/10.1371/journal.pone.0282110
