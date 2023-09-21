@@ -125,7 +125,9 @@ The segmentation models were evaluated on an internal dataset against manual ann
 | Parenchyma | 0.946±0.046 | 10.122±11.032 |
 | Vessels | 0.355±0.090 | 24.872±5.161 |
 
-The parenchyma segmentation model was trained on the LITS dataset, whereas the vessel model was trained on a local dataset. The LITS dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org/competitions/17094).
+The parenchyma segmentation model was trained on the LITS dataset, whereas the vessel model was trained on a local dataset (Oslo-CoMet). The LITS dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org/competitions/17094).
+
+The Oslo-CoMet included 60 patients, of which 11 representative patients were used as hold out sample for the performance metrics assessment.
 
 ## Acknowledgements
 If you found this tool helpful in your research, please, consider citing it (see [here](https://zenodo.org/badge/latestdoi/238680374) for more information on how to cite):
