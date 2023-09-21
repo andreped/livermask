@@ -117,8 +117,18 @@ https://doi.org/10.1371/journal.pone.0282110
 * Lee et al., Robust End-to-End Focal Liver Lesion Detection Using Unregistered Multiphase Computed Tomography Images, IEEE Transactions on Emerging Topics in Computational Intelligence, 2021, https://doi.org/10.1109/TETCI.2021.3132382
 * Survarachakan et al., Effects of Enhancement on Deep Learning Based Hepatic Vessel Segmentation, Electronics, 2021, https://doi.org/10.3390/electronics10101165
 
+## Segmentation performance metrics
+The segmentation models were evaluated on an internal dataset against manual annotations. See Table E in S4 Appendix in the Supporting Information of [this paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0282110) for more information. The table presented there can also be seen below:
+
+| Class | DSC | HD95 |
+|--------|-------------------|------------------|
+| Parenchyma | 0.946±0.046 | 10.122±11.032 |
+| Vessels | 0.355±0.090 | 24.872±5.161 |
+
+The parenchyma segmentation model was trained on the LITS dataset, whereas the vessel model was trained on a local dataset. The LITS dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org/competitions/17094).
+
 ## Acknowledgements
-If you found this tool helpful in your research, please, consider citing it:
+If you found this tool helpful in your research, please, consider citing it (see [here](https://zenodo.org/badge/latestdoi/238680374) for more information on how to cite):
 <pre>
 @software{andre_pedersen_2023_7574587,
   author       = {André Pedersen and Javier Pérez de Frutos},
@@ -132,6 +142,19 @@ If you found this tool helpful in your research, please, consider citing it:
 }
 </pre>
 
-Information on how to cite can be found [here](https://zenodo.org/badge/latestdoi/238680374).
-
-The model was trained on the LITS dataset. The dataset is openly accessible and can be downloaded from [here](https://competitions.codalab.org/competitions/17094).
+In addition, the segmentation performance of the tool was presented in [this paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0282110), thus, cite this tool as well if that is of relevance for you study:
+<pre>
+@article{perezdefrutos2022ddmr,
+    title = {Learning deep abdominal CT registration through adaptive loss weighting and synthetic data generation},
+    author = {Pérez de Frutos, Javier AND Pedersen, André AND Pelanis, Egidijus AND Bouget, David AND Survarachakan, Shanmugapriya AND Langø, Thomas AND Elle, Ole-Jakob AND Lindseth, Frank},
+    journal = {PLOS ONE},
+    publisher = {Public Library of Science},
+    year = {2023},
+    month = {02},
+    volume = {18},
+    doi = {10.1371/journal.pone.0282110},
+    url = {https://doi.org/10.1371/journal.pone.0282110},
+    pages = {1-14},
+    number = {2}
+}
+</pre>
