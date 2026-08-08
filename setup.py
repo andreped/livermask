@@ -1,12 +1,8 @@
 from setuptools import setup, find_packages
-from setuptools.command.install import install
 import os
 
 with open("README.md", "r", errors='ignore') as f:
     long_description = f.read()
-
-with open('requirements.txt', 'r', encoding='utf-16', errors='ignore') as ff:
-    required = ff.read().splitlines()
 
 setup(
     name='livermask',
@@ -25,7 +21,20 @@ setup(
             'livermask = livermask.livermask:main',
         ]
     },
-    install_requires=required,
+    install_requires=[
+        "tensorflow>=2.4",
+        "nibabel>=3.2",
+        "scipy>=1.7",
+        "scikit-image>=0.18",
+        "chainer>=7.8",
+        "gdown>=4.4",
+        "tqdm>=4.62",
+        "numba>=0.53",
+        "requests>=2.26",
+        "typing-extensions>=3.10",
+        "importlib-metadata>=4.8.1",
+        "Werkzeug>=2.0.1",
+    ],
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
